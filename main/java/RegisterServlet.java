@@ -43,7 +43,14 @@ public class RegisterServlet extends HttpServlet {
 			String username=request.getParameter("username");
 
 			String password=request.getParameter("pass");
-			//System.out.println(" Let'z go register em="+mail+" sexe="+sexe+" nom prenom="+nom+" "+prenom+" pass="+password+" username="+username);
+			
+			String date=request.getParameter("date");
+				
+			System.out.println("La date vaut : "+date);
+			System.out.println(" Let'z go register em="+mail+" sexe="+sexe+" nom prenom="+nom+" "+prenom+" pass="+password+" username="+username);
+
+			java.sql.Date dateN= java.sql.Date.valueOf(date);
+			
 			
 
 			HttpSession session = request.getSession();
@@ -56,7 +63,7 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("formDone",true);
 				request.setAttribute("allOk",false);
 
-				sc.createUser(mail, password, nom, username,sexe,prenom);
+				sc.createUser(mail, password, nom, username,sexe,prenom,dateN);
 			}
 			
 			

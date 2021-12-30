@@ -12,6 +12,9 @@ public class UserBean  {
 	private String sexe;
 	private java.sql.Date date; 
 	
+	private java.sql.Date dateNaissance; 
+
+	
 	public int getId() {
 		return this.id;
 	}
@@ -82,5 +85,13 @@ public class UserBean  {
 
 	public void setDate(java.sql.Date date) {
 		this.date = date;
+	}
+
+	public java.sql.Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(java.sql.Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
 	}
 }

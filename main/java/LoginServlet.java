@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		SQLConnector sc=new SQLConnector();
 		
 		UserBean current_user=sc.getUser(email, pass);
+		
 		if(current_user!=null) {
 			
 			System.out.println(current_user.getEmail()+" id = "+current_user.getId());
@@ -53,7 +54,10 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
 
 		}else {
+
 			request.setAttribute("notCo", 0);
+			request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+
 			
 		}
 		

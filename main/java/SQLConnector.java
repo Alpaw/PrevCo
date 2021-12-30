@@ -72,7 +72,7 @@ public class SQLConnector {
 			   return user;
 		   }
 		   
-		public void createUser(String email, String password, String nom,String username,String sexe,String prenom) {
+		public void createUser(String email, String password, String nom,String username,String sexe,String prenom, java.sql.Date dateN ) {
 			
 			   Connection con = connect();
 			   java.util.Date date = new java.util.Date();
@@ -80,8 +80,8 @@ public class SQLConnector {
 			   
 			    try {
 			    	Statement stmt = con.createStatement();
-			    	String rqString = "INSERT INTO User (id,username,email,password,date_creation,nom,role,sexe,prenom) VALUES (0,"
-			    			+"'" +username+"' ,'"+email.toLowerCase()+"','"+password+"','"+sqlDate+"','"+nom+"','basic_user','"+sexe+"','"+prenom+"')";
+			    	String rqString = "INSERT INTO User (id,username,email,password,date_creation,nom,role,sexe,prenom,naissance) VALUES (0,"
+			    			+"'" +username+"' ,'"+email.toLowerCase()+"','"+password+"','"+sqlDate+"','"+nom+"','basic_user','"+sexe+"','"+prenom+"','"+dateN+"')";
 					//System.out.println(rqString);
 			    	stmt.executeUpdate(rqString);
 				    con.close();

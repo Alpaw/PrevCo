@@ -23,6 +23,7 @@ if(request.getAttribute("notCo")!=null){
 		out.print("<script>alert('Mauvais identifiant ou mdp')</script>");
 
 	}
+
 }
 
 if(request.getAttribute("formDone")==null){
@@ -126,6 +127,16 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
                                      />
                                     <label class="control-label" for="input">Last Name</label><i class="mtrl-select"></i>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" required="required" name="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<% if(request.getParameter("date")!=null)  out.print(request.getParameter("date")); %>"
+                                    oninvalid="this.setCustomValidity('AAAA-MM-JJ')"
+                                    oninput="this.setCustomValidity('')"
+                                     />
+                                    <label class="control-label" for="input">Naissance (AAAA-MM-JJ)</label><i class="mtrl-select"></i>
+                                </div>
+                                
+                                
                                 <div class="form-group">
                                     <input type="text" required="required" name="username"
                                     pattern="[a-zA-Z0-9]*" value="<%if(request.getParameter("username")!=null)  out.print(request.getParameter("username")); %>"
