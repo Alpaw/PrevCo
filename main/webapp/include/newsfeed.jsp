@@ -53,7 +53,7 @@
 				<li><span>Time Line</span>
 					<ul>
 						<li><a href="time-line.html" title="">timeline</a></li>
-						<li><a href="timeline-friends.html" title="">timeline friends</a></li>
+						<li><a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">timeline friends</a></li>
 						<li><a href="timeline-groups.html" title="">timeline groups</a></li>
 						<li><a href="timeline-pages.html" title="">timeline pages</a></li>
 						<li><a href="timeline-photos.html" title="">timeline photos</a></li>
@@ -230,7 +230,7 @@
 					<a href="#" title="">timeline</a>
 					<ul>
 						<li><a href="time-line.html" title="">timeline</a></li>
-						<li><a href="timeline-friends.html" title="">timeline friends</a></li>
+						<li><a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">timeline friends</a></li>
 						<li><a href="timeline-groups.html" title="">timeline groups</a></li>
 						<li><a href="timeline-pages.html" title="">timeline pages</a></li>
 						<li><a href="timeline-photos.html" title="">timeline photos</a></li>
@@ -461,7 +461,7 @@
 											</li>
 											<li>
 												<i class="ti-user"></i>
-												<a href="timeline-friends.html" title="">friends</a>
+												<a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a>
 											</li>
 											<li>
 												<i class="ti-image"></i>
@@ -1588,6 +1588,7 @@
 	<% // <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="< = request.getContextPath() > /template/js/main.min.js"></script> %>
 	<script src="<%= request.getContextPath() %>/template/js/script.js"></script>
 	<script src="<%= request.getContextPath() %>/template/js/map-init.js"></script>
+	<script src="<%= request.getContextPath() %> /template/js/main.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 
 </body>	

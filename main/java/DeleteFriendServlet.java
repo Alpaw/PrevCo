@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BeanPackage.UserBean;
-import sql.*;
+import sql.SQLConnector;
+
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class DeleteFriendServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/DeleteFriendServlet")
+public class DeleteFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public DeleteFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,45 +33,32 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String email=request.getParameter("username");
-		String pass=request.getParameter("pass");
+		
+		
+		
 
-		
-		
-		System.out.println("Le username : "+email+" le pass :"+pass);
+		SQLConnector sql=new SQLConnector();
 		HttpSession session = request.getSession();
-
-		SQLConnector sc=new SQLConnector();
-		
-		UserBean current_user=sc.getUser(email, pass);
-		if(current_user==null) {
-			current_user=(UserBean) session.getAttribute("current_user");
-			 //email=current_user.getEmail();
-			 //pass=current_user.getPassword();
-
-		}
-		
-		if(current_user!=null) {
-			
-			System.out.println(current_user.getEmail()+" id = "+current_user.getId());
-			
-			session.setAttribute("current_user",current_user);
-			request.setAttribute("current_user",current_user);
-			request.setAttribute("notCo", 1);
-
-			request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
-
-		}else {
-
-			request.setAttribute("notCo", 0);
-			request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+		UserBean u=(UserBean) session.getAttribute("current_user");
+		if(u==null || request.getParameter("idToDelete")==null) {
+			request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
 
 			
 		}
-		
-		//Si il a mis les infos correct 
+		else {
+			try{
+				sql.deleteFriend(u.getId(),Integer.parseInt(request.getParameter("idToDelete")) );
+				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+			}catch(java.lang.NumberFormatException e) {
+				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
 
+			}
+			
+
+		}
 		
+		
+
 		
 	}
 
