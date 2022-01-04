@@ -53,13 +53,21 @@ public class LoginServlet extends HttpServlet {
 		
 		if(current_user!=null) {
 			
+			
 			System.out.println(current_user.getEmail()+" id = "+current_user.getId());
 			
 			session.setAttribute("current_user",current_user);
 			request.setAttribute("current_user",current_user);
 			request.setAttribute("notCo", 1);
 
-			request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
+			System.out.println("Role : "+current_user.getRang());
+			String rang=current_user.getRang();
+			if( (rang == "administrateur") || (rang.equals("administrateur"))	) {
+				request.getRequestDispatcher( "/include/choixPages.jsp" ).forward( request, response );
+
+			}else {
+			request.getRequestDispatcher( "/include/choixPages.jsp" ).forward( request, response );
+			}
 
 		}else {
 

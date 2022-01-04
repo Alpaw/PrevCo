@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SQLConnector {
 	
@@ -258,7 +259,15 @@ public class SQLConnector {
 					doUpdate(req);
 
 		   }
-		  
+		   
+		   
+		   public void deleteUser(int id) {
+			   String req="DELETE FROM USER WHERE  ID='"+id+"'";
+				doUpdate(req);
+
+		   }
+		   
+		   
 		   public void confirmFriend(int id1, int id2) {
 			   String req="DELETE FROM FRIENDSHIP WHERE  USERID1='"+id2+"' AND userid2='"+id1+"' AND STATUS='1'";
 			   String req2="DELETE FROM FRIENDSHIP WHERE  USERID1='"+id1+"' AND userid2='"+id2+"' AND STATUS='1'";
@@ -369,6 +378,41 @@ public class SQLConnector {
 			}
 			return -1;
 		}
+		
+		public ArrayList<UserBean> getAllUsers(){
+			ArrayList<UserBean> list=new ArrayList<UserBean>();
+			
+			SQLConnector sql=new SQLConnector();
+			String rq="SELECT * FROM USER ";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					UserBean u = new UserBean();
+					u.setNom(rs.getString("nom"));
+					u.setPrenom(rs.getString("prenom"));
+					u.setDate(rs.getDate("date_creation"));
+					u.setUsername(rs.getString("username"));
+					u.setEmail(rs.getString("email"));
+					u.setId(rs.getInt("id"));
+					u.setRang(rs.getString("role"));
+
+					list.add(u);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			return list;
+		}
+		
 		   
 		
 		
