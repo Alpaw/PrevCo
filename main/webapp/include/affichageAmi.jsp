@@ -11,7 +11,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
+    <link rel="icon" href="<%= request.getContextPath() %>/template/images/fav.png" type="image/png" sizes="16x16"> 
     
     <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/main.min.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/style.css">
@@ -471,7 +471,6 @@ if(session.getAttribute("friend_to_show")==null){
 													ArrayList<Friend> list=sql.getFriends((us.getId()));
 													boolean ami=false;
 													for(Friend f: list){
-														System.out.println(" jtest : "+f.getId()+" , "+usShow.getId());
 														if(f.getId() == usShow.getId() ){
 															//Ils sont déjà amis
 															ami=true;
@@ -497,23 +496,56 @@ if(session.getAttribute("friend_to_show")==null){
 														int friendship=sql.getFriendship(us.getId(),usShow.getId());
 														if(friendship==1){
 															//user a deja envoyé sa demande
-															out.print("<a class='underline' title='' data-ripple=''>Request send</a>");
+															out.print("<a class='underline' title='' data-ripple=''>Request send</a>"+
+															
+															"<form method='post' action='"+ request.getContextPath() +"/CancelFriendServlet' id='cancel' >"+
+															"<input type='hidden'" +" value='"+usShow.getId()+"' name='idToCancel' "+"></input>"+
+																	"<input type='hidden'" +" value='"+1+"' name='redirectionPage' "+"></input>"+
+
+															"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>");
+
 
 														}else{
-														
-														out.print("<form method='post' action='"+ request.getContextPath() +"/AjouterAmisServlet' >"+
-																"<input type='hidden' name='idToAdd' value='"+usShow.getId()+"'>"+
-																"<input type='submit' class='underling' value='Add Friend'>  </input>"
-																
-																
-																
-																+"</form>"
+															
+															int friendShip2= sql.getFriendship(usShow.getId(),us.getId());
+															if(friendShip2==1){
+																//User qu'on affiche à déjà envoyé sa demande
+																out.print("<form method='post' action='"+ request.getContextPath() +"/AjouterAmisServlet' >"+
+																		"<input type='hidden' name='idToAdd' value='"+usShow.getId()+"'>"+
+																		"<input type='submit' class='underling' value='Add Friend'>  </input>"
+																		
+																		
+																		
+																		+"</form>"+
 
+																		
+																		"<form method='post' action='"+ request.getContextPath() +"/CancelFriendServlet' id='cancel' >"+
+																		"<input type='hidden'" +" value='"+usShow.getId()+"' name='idToCancel' "+"></input>"+
+																				"<input type='hidden'" +" value='"+1+"' name='redirectionPage' "+"></input>"+
+
+																		"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>"
+
+																		
 																
+																		);
+															}
+															else{
+																out.print("<form method='post' action='"+ request.getContextPath() +"/AjouterAmisServlet' >"+
+																		"<input type='hidden' name='idToAdd' value='"+usShow.getId()+"'>"+
+																		"<input type='submit' class='underling' value='Send request'>  </input>"
+																		
+																		
+																		
+																		+"</form>"
+
+																		
+																		
+																		
 																
-																
+																		);
+															}
 														
-																);
+														
 														
 														
 
@@ -1522,7 +1554,8 @@ if(session.getAttribute("friend_to_show")==null){
 		</form>
 	</div><!-- side panel -->		
 	
-	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+	</script><script src="js/main.min.js"></script>
 	<script src="js/script.js"></script>
 
 </body>	

@@ -2,6 +2,8 @@ package sql;
 
 import BeanPackage.Friend;
 import BeanPackage.UserBean;
+import BeanPackage.VilleBean;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -264,6 +266,8 @@ public class SQLConnector {
 		   public void deleteUser(int id) {
 			   String req="DELETE FROM USER WHERE  ID='"+id+"'";
 				doUpdate(req);
+				String req1="DELETE FROM FRIENDSHIP WHERE  USERID1='"+id+"' OR userid2='"+id+"' ";
+				doUpdate(req1);
 
 		   }
 		   
@@ -382,7 +386,6 @@ public class SQLConnector {
 		public ArrayList<UserBean> getAllUsers(){
 			ArrayList<UserBean> list=new ArrayList<UserBean>();
 			
-			SQLConnector sql=new SQLConnector();
 			String rq="SELECT * FROM USER ";
 			ResultSet rs= doRequest(rq);
 			
@@ -411,6 +414,34 @@ public class SQLConnector {
 			
 			
 			return list;
+		}
+		
+		
+		public ArrayList<VilleBean> getAllVille(){
+			ArrayList<VilleBean> list= new ArrayList<VilleBean>();
+			
+			String rq="SELECT * FROM VILLES_FRANCE_FREE ";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					VilleBean v = new VilleBean();
+					
+					v.setLatitude(rs.getFloat("ville_latitude_deg"));
+					v.setLongitude(rs.getFloat("ville_longitude_deg"));
+					v.setNom(rs.getString("ville_nom"));
+
+					list.add(v);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return list;
+			
 		}
 		
 		   

@@ -3,12 +3,15 @@
 
 
 <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
+   <link rel="icon" href="<%= request.getContextPath() %>/template/images/fav.png" type="image/png" sizes="16x16"> 
+    
     
     <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/main.min.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/style.css">

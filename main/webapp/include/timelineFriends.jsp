@@ -7,7 +7,16 @@
 
 
 <head>
-
+   <link rel="icon" href="<%= request.getContextPath() %>/template/images/fav.png" type="image/png" sizes="16x16"> 
+    
+    
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/main.min.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/color.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/responsive.css">
+    
+    
+    
 <% if(session.getAttribute("current_user")==null){
 	request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
 
@@ -18,12 +27,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="<%= request.getContextPath() %>/template/images/fav.png" type="image/png" sizes="16x16"> 
-    
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/main.min.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/style.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/color.css">
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/responsive.css">
+ 
 
 </head>
 <body>
@@ -692,7 +696,8 @@
 															
 															"<form method='post' action='"+ request.getContextPath() +"/CancelFriendServlet' id='cancel' "+f.getId()+"'>"+
 															"<input type='hidden'" +" value='"+f.getId()+"' name='idToCancel' "+"></input>"+
-															
+																	"<input type='hidden'" +" value='"+2+"' name='redirectionPage' "+"></input>"+
+
 															"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>"+
 															
 															
@@ -945,7 +950,8 @@
 			</form>
 		</div><!-- side panel -->		
 	
-	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="<%= request.getContextPath() %>/template/js/main.min.js"></script>
+	
+	<script src="<%= request.getContextPath() %>/template/js/main.min.js"></script>
 	<script src="<%= request.getContextPath() %>/template/js/script.js"></script>
 	<script src="<%= request.getContextPath() %>/template/js/map-init.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>

@@ -34,17 +34,34 @@ public class CancelFriendServlet extends HttpServlet {
 		SQLConnector sql=new SQLConnector();
 		HttpSession session = request.getSession();
 		UserBean u=(UserBean) session.getAttribute("current_user");
+		
+		
+		
+		String[] redirectionPage= new String[] {"include/timelineFriends.jsp","include/affichageAmi.jsp"};
+		int redirection=0;
+		try{
+			
+			
+			redirection= Integer.parseInt(request.getParameter("redirectionPage"));
+		}catch(java.lang.NumberFormatException e) {
+			request.getRequestDispatcher(  redirectionPage[0] ).forward( request, response );
+
+		}
+
+
 		if(u==null || request.getParameter("idToCancel")==null) {
-			request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+			request.getRequestDispatcher(  redirectionPage[redirection] ).forward( request, response );
 
 			
 		}
 		else {
 			try{
 				sql.cancelFriend(u.getId(),Integer.parseInt(request.getParameter("idToCancel")) );
-				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+				
+				
+				request.getRequestDispatcher(  redirectionPage[redirection] ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+				request.getRequestDispatcher(  redirectionPage[redirection] ).forward( request, response );
 
 			}
 			
