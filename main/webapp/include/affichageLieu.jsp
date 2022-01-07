@@ -116,6 +116,25 @@
         </div>
         
         
+ <form>
+  <div class="form-group">
+		<input type="text" id="adresse" >Adresse</input>
+				    
+  </div>
+
+
+  <button type="button" onClick="afficherAdresse()" class="btn btn-primary">Submit</button>
+</form>
+
+
+<div class="form-group" id="showResultAdress">
+
+
+</div>
+
+
+
+
         
 
         <!-- Fichiers Javascript -->
@@ -181,12 +200,12 @@
 
                 // we are using MapQuest's Nominatim service
                 var geocode = 'http://www.mapquestapi.com/geocoding/v1/reverse?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location='+e.latlng.lat+','+e.latlng.lng+'&includeRoadMetadata=true&includeNearestIntersection=true';
-
+                https://www.mapquestapi.com/geocoding/v1/address?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location=boulangerie%20nancy
 
 
                 // use jQuery to call the API and get the JSON results
                 $.getJSON(geocode, function(data) {
-                  console.log(data['results'][0]['locations'][0]['street']);
+                  console.log(data['results'][0]['locations']);
                 	
                   //console.log(data);
                 });
@@ -235,6 +254,61 @@
                   }
                 }
               }
+            }
+            
+            function afficherAdresse(){
+            	adressse=document.getElementById("adresse");
+            	console.log(adresse.value);
+            	
+            	//On va regarder les lieux dispo pour cette adresse
+            	 var geocode ='https://www.mapquestapi.com/geocoding/v1/address?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location='+adresse.value;
+            	
+            	var newGeocode= ' https://api-adresse.data.gouv.fr/search/?q='+adresse.value;
+
+                 // use jQuery to call the API and get the JSON results
+                 $.getJSON(newGeocode, function(data) {
+                   console.log(data['features']);
+                 	
+                   
+                   var node= document.getElementById("showResultAdress");
+
+                   while (node.firstChild) {
+                	   //On supprime tte les anciennes recherches
+                	   node.removeChild(node.firstChild);
+                	}
+                   
+                   
+                   for(i=0;i<data['features'].length;i++){
+                	   var lng=data["features"][i]["geometry"]["coordinates"][0];
+                	   var lat=data["features"][i]["geometry"]["coordinates"][1];
+                	   var ville=data["features"][i]["properties"]["city"];
+                	   var codePostal=data["features"][i]["properties"]["citycode"];
+                	   var context=data["features"][i]["properties"]["context"];
+                	   var adrComplete=data["features"][i]["properties"]["label"];
+
+                	   node.innerHTML += '<tr >';
+                	   node.innerHTML += '<td> Ville : '+ville+'</td	><br>';
+                	   node.innerHTML += '<td> Code postal : '+codePostal+'</td	><br>';
+                	   node.innerHTML += '<td> Adresse complète : '+adrComplete+'</td	><br>';
+                	   node.innerHTML += '<td> Plus d\'infos : '+context+'</td	><br>';
+                  	   node.innerHTML +='<button onclick="carte.flyTo(['+lat+','+lng+'], 20)" >Aller</button> </tr> <br><br><br>';
+
+                	  
+                   }
+                   //console.log(data);
+                 });
+            	
+            }
+            
+            function placerSurMap(lng,lat,ville){
+            	consol.log("je tp ");
+            	
+            	popup
+                .setLatLng(L.latLng(lat, lng))
+                .setContent("You are in : "+ville)
+                .openOn(carte);
+           	
+           	carte.flyTo([lat,lng], 15);
             }
             
             
