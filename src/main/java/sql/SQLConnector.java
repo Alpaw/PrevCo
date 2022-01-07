@@ -1,7 +1,10 @@
 package sql;
 
 import BeanPackage.Friend;
+import BeanPackage.NotificationBean;
 import BeanPackage.UserBean;
+import BeanPackage.VilleBean;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +15,10 @@ import java.util.List;
 public class SQLConnector {
 	
 		public SQLConnector() {
+			
+		}
+		
+		public void createTables() {
 			Connection con = connect();
 			Statement stmt;
 			try {
@@ -205,7 +212,7 @@ public class SQLConnector {
 			   return con;
 		   }
 		   
-		    public static void main (String[] args) {
+		   public static void main (String[] args) {
 			   connect();
 		   }
 		   
@@ -400,6 +407,7 @@ public class SQLConnector {
 						//Sinon on envoie la demande depuis id1 vers id2
 						doUpdate(req1);
 						
+						
 						   
 					} else {
 						confirmFriend(id1,id2);
@@ -463,7 +471,51 @@ public class SQLConnector {
 			return list;
 		}
 		
-		   
+		public ArrayList<VilleBean> getAllVille(){
+			ArrayList<VilleBean> list= new ArrayList<VilleBean>();
+			
+			String rq="SELECT * FROM VILLES_FRANCE_FREE ";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					VilleBean v = new VilleBean();
+					
+					v.setLatitude(rs.getFloat("ville_latitude_deg"));
+					v.setLongitude(rs.getFloat("ville_longitude_deg"));
+					v.setNom(rs.getString("ville_nom"));
+
+					list.add(v);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return list;
+			
+		}
 		
-		
+		public ArrayList<NotificationBean> getAllNotifs(int idUser){
+			ArrayList<NotificationBean> list= new ArrayList<NotificationBean>();
+			
+			String rq="SELECT * FROM Notification WHERE userId2="+idUser;
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					NotificationBean notif = new NotificationBean();
+					notif.setType(rs.getInt("type"));
+					notif.setDate(rs.getDate("createdAt"));
+					list.add(notif);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
 }
