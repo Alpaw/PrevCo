@@ -42,7 +42,8 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		SQLConnector sc=new SQLConnector();
-		
+		sc.createTables();
+
 		UserBean current_user=sc.getUser(email, pass);
 		if(current_user==null) {
 			current_user=(UserBean) session.getAttribute("current_user");

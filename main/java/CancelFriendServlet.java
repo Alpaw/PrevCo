@@ -48,7 +48,6 @@ public class CancelFriendServlet extends HttpServlet {
 
 		}
 
-
 		if(u==null || request.getParameter("idToCancel")==null) {
 			request.getRequestDispatcher(  redirectionPage[redirection] ).forward( request, response );
 

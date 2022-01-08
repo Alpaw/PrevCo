@@ -57,6 +57,7 @@ public class AffichageAmi extends HttpServlet {
 					request.setAttribute("idToShow",session.getAttribute("idToShow"));
 					request.getRequestDispatcher( "/include/affichageAmi.jsp" ).forward( request, response );
 				}
+				
 				else {
 
 					request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );

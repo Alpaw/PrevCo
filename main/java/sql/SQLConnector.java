@@ -5,9 +5,6 @@ import BeanPackage.UserBean;
 import BeanPackage.VilleBean;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +12,61 @@ public class SQLConnector {
 	
 		public SQLConnector() { }
 
+		
+
+		public void createTables() {
+			Connection con = connect();
+
+			Statement stmt;
+			try {
+				stmt = con.createStatement();
+
+				String rqFriendship = "CREATE TABLE IF NOT EXISTS `friendship` (\n"
+						 + "  `id` int(255) NOT NULL AUTO_INCREMENT,\n"
+						 + "  `userId1` int(255) NOT NULL,\n"
+						 + "  `userId2` int(255) NOT NULL,\n"
+						 + "  `status` int(255) NOT NULL,\n"
+						 + "  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n"
+						 + "  PRIMARY KEY (`id`)\n"
+						 + ") ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;"
+						 ;
+				String rqStatus = "CREATE TABLE IF NOT EXISTS `status` (\n"
+						+ "  `id` int(255) NOT NULL UNIQUE,\n"
+						+ "  `status` varchar(255) COLLATE utf8_bin NOT NULL\n"
+						+ ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;"
+						;
+				
+				String rqStatusIns = "INSERT INTO `status` (`id`, `status`) VALUES\n"
+						+ "(1, 'request send'),\n"
+						+ "(2, 'friends'),\n"
+						+ "(3, 'request cancelled');";
+				
+				String rqUser = "CREATE TABLE IF NOT EXISTS `user` (\n"
+						+ "  `id` bigint(20) NOT NULL AUTO_INCREMENT,\n"
+						+ "  `username` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `email` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `password` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `date_creation` date NOT NULL,\n"
+						+ "  `nom` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `role` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `sexe` varchar(10) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `prenom` varchar(255) COLLATE utf8_bin NOT NULL,\n"
+						+ "  `naissance` date NOT NULL,\n"
+						+ "  PRIMARY KEY (`id`),\n"
+						+ "  UNIQUE KEY `email` (`email`)\n"
+						+ ") ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
+				
+				stmt.executeUpdate(rqFriendship);
+				stmt.executeUpdate(rqStatus);
+				stmt.executeUpdate(rqStatusIns);
+				stmt.executeUpdate(rqUser);
+				
+			    con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		public boolean userExist(String email) {
@@ -442,6 +494,98 @@ public class SQLConnector {
 			
 			return list;
 			
+		}
+		
+		public boolean ajouterLieu(String nom, String adresse,String ville,float lat,float lng) {
+			//On vérifie que le lieu n'existe pas déjà 
+			
+			 String rqString = "SELECT * FROM LIEU WHERE nom='"+nom+"' AND adresse='"+adresse+"'";
+			   ResultSet resultSet = doRequest(rqString);
+			   
+			   
+			   try {
+				if (!resultSet.isBeforeFirst() ) {    
+
+					
+					String req="INSERT INTO `lieu`(`id`, `nom`, `lat`, `lng`, `adresse`, `ville`) VALUES (0,'"+nom+"','"+lat+"','"+lng+"','"+adresse+"','"+ville+"')";
+					doUpdate(req);
+						
+						   
+					} else {
+						return false;
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return true;
+		}
+		
+		
+		public ArrayList<VilleBean> getAllLieu(){
+			ArrayList<VilleBean> list=new ArrayList<VilleBean>();
+			
+			String rq="SELECT * FROM lieu ";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					VilleBean v = new VilleBean();
+					v.setNom(rs.getString("nom"));
+					v.setLatitude(rs.getFloat("lat"));
+					v.setLongitude(rs.getFloat("lng"));
+					v.setAdresse(rs.getString("adresse"));
+					v.setVille(rs.getString("ville"));
+
+					
+					list.add(v);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			return list;
+		}
+		
+		public ArrayList<VilleBean> getAllLieuByVille(String ville){
+			ArrayList<VilleBean> list=new ArrayList<VilleBean>();
+			
+			String rq="SELECT * FROM USER where ville='"+ville+"'";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					VilleBean v = new VilleBean();
+					v.setNom(rs.getString("nom"));
+					v.setLatitude(rs.getFloat("lat"));
+					v.setLongitude(rs.getFloat("lng"));
+					v.setAdresse(rs.getString("adresse"));
+					v.setVille(rs.getString("ville"));
+
+					
+					list.add(v);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			return list;
 		}
 		
 		   

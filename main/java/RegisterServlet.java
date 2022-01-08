@@ -58,6 +58,8 @@ public class RegisterServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			SQLConnector sc = new SQLConnector();
+			sc.createTables();
+
 			if(sc.userExist(mail)) {
 				request.setAttribute("mailAlreadyExist", true);
 				
