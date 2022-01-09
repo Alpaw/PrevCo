@@ -313,7 +313,7 @@ if(session.getAttribute("friend_to_show")==null){
                                                             
                                                             	<%
                                                             	 sql=new SQLConnector();
-                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	 u = (UserBean) session.getAttribute("current_user");
                                                             	ArrayList<ActiviteBean> listAc= sql.getAllActiviteByUser(u.getId());
                                                             	
                                                             	int cptAct=0;
