@@ -94,7 +94,7 @@ if(session.getAttribute("current_user")==null){
                                                             <h4 class="widget-title">Shortcuts</h4>
                                                             <ul class="naves">
                                                                 <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath()%>/include/newsfeed.jsp" title="">News feed</a></li>
-                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
+                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">Amis</a></li>
 
                                                                 <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
                                                                 <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
@@ -484,7 +484,7 @@ if(session.getAttribute("current_user")==null){
                                                         <!-- page like widget -->
 
                                                         <div class="widget friend-list stick-widget">
-                                                            <h4 class="widget-title">Friends</h4>
+                                                            <h4 class="widget-title">Amis</h4>
                                                             <div id="searchDir"></div>
                                                             <ul id="people-list" class="friendz-list">
 

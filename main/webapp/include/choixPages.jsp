@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Réseau Social PrevCo</title>
+<title>Reseau Social PrevCo</title>
 <link rel="icon"
 	href="<%= request.getContextPath() %>/template/images/fav.png"
 	type="image/png" sizes="16x16">
@@ -67,25 +67,22 @@ if(session.getAttribute("current_user")==null){
 									src="<%= request.getContextPath() %>/template/images/wink.png"
 									alt=""></span>
 							</div>
-							<a href="#" title="" class="folow-me">Follow Us on</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="login-reg-bg">
 						<div class="log-reg-area sign">
-							<h2 class="log-title">Choose an option</h2>
+							<h2 class="log-title">Choisir une option</h2>
 							<form
 								action="<%= request.getContextPath() %>/admin_dashboard/adminDashboard.jsp"
 								method="post">
-								<button type="submit" class="btn btn-dark">Admin
-									dashboard</button>
+								<button type="submit" class="btn btn-dark">Panel administrateur</button>
 							</form>
 							<form
 								action="<%= request.getContextPath() %>/include/newsfeed.jsp"
 								method="post">
-								<button type="submit" class="btn btn-secondary">Simple
-									user</button>
+								<button type="submit" class="btn btn-secondary">Utilisateur basique</button>
 							</form>
 						</div>
 
