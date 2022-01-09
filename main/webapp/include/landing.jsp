@@ -83,6 +83,7 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 									src="<%= request.getContextPath() %>/template/images/wink.png"
 									alt=""></span>
 							</div>
+							<a href="#" title="" class="folow-me">Follow Us on</a>
 						</div>
 					</div>
 				</div>
@@ -90,7 +91,10 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 					<div class="login-reg-bg">
 						<div class="log-reg-area sign">
 							<h2 class="log-title">Login</h2>
-							
+							<p>
+								Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a
+									href="#" title="">Join now</a>
+							</p>
 							<form method="post"
 								action="<%= request.getContextPath() %>/LoginServlet">
 								<div class="form-group">
@@ -113,14 +117,17 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 										class="mtrl-select"></i>
 								</div>
 								<div class="checkbox">
-									
+									<label> <input type="checkbox" checked="checked" /><i
+										class="check-box"></i>Always Remember Me.
+									</label>
 								</div>
+								<a href="#" title="" class="forgot-pwd">Forgot Password?</a>
 								<div class="submit-btns">
 									<button class="mtr-btn signin" type="submit">
-										<span>Se connecter</span>
+										<span>Login</span>
 									</button>
 									<button class="mtr-btn signup" type="button">
-										<span>S'inscrire</span>
+										<span>Register</span>
 									</button>
 								</div>
 							</form>
@@ -129,8 +136,11 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 
 						</div>
 						<div class="log-reg-area reg">
-							<h2 class="log-title">S'inscrire</h2>
-							
+							<h2 class="log-title">Register</h2>
+							<p>
+								Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a
+									href="#" title="">Join now</a>
+							</p>
 							<form method="post"
 								action="<%= request.getContextPath() %>/RegisterServlet"
 								onsubmit="return validation()">
@@ -141,7 +151,7 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
                                     																									out.print(request.getParameter("prenom")); %>"
 										oninvalid="this.setCustomValidity('Prenom de type John-Doe ou John')"
 										oninput="this.setCustomValidity('')" /> <label
-										class="control-label" for="input">Prenom</label><i
+										class="control-label" for="input">First Name</label><i
 										class="mtrl-select"></i>
 								</div>
 								<div class="form-group">
@@ -150,7 +160,7 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 										value="<% if(request.getParameter("nom")!=null)  out.print(request.getParameter("nom")); %>"
 										oninvalid="this.setCustomValidity('Nom de type John-Doe ou John')"
 										oninput="this.setCustomValidity('')" /> <label
-										class="control-label" for="input">Nom</label><i
+										class="control-label" for="input">Last Name</label><i
 										class="mtrl-select"></i>
 								</div>
 
@@ -171,7 +181,7 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 										value="<%if(request.getParameter("username")!=null)  out.print(request.getParameter("username")); %>"
 										oninvalid="this.setCustomValidity('Que des caract. et des chiffres.')"
 										oninput="this.setCustomValidity('')" /> <label
-										class="control-label" for="input">Username</label><i
+										class="control-label" for="input">User Name</label><i
 										class="mtrl-select"></i>
 								</div>
 								<div class="form-group">
@@ -180,7 +190,7 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 										oninvalid="this.setCustomValidity('1 maj,1 min,1 chiffre,1 symbole (!@#$%^&*_=+-), min 8 caract., max 12')"
 										oninput="this.setCustomValidity('')" name="pass"
 										value="<%if(request.getParameter("password")!=null)  out.print(request.getParameter("password"));%>" />
-									<label class="control-label" for="input">Mot de passe</label><i
+									<label class="control-label" for="input">Password</label><i
 										class="mtrl-select"></i>
 								</div>
 								<div class="form-radio">
@@ -227,14 +237,16 @@ if((boolean)request.getAttribute("formDone") && request.getAttribute("allOk")!=n
 								</div>
 								<div class="checkbox">
 									<label> <input type="checkbox" checked="checked"
-										required="required" /><i class="check-box"></i>Accepter les CGU
+										required="required" /><i class="check-box"></i>Accept Terms &
+										Conditions ?
 									</label>
 								</div>
-								<a href="#" title="" class="already-have">Vous avez deja un compte</a>
+								<a href="#" title="" class="already-have">Already have an
+									account</a>
 								<div class="submit-btns">
 									<button type="submit" class="mtr-btn signin"
 										style="padding: 5px 20px" name="registerBtn">
-										<span>S'inscrire</span>
+										<span>Register</span>
 									</button>
 								</div>
 							</form>

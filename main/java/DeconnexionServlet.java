@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BeanPackage.UserBean;
-import sql.SQLConnector;
 
 /**
- * Servlet implementation class AjouterAmisServlet
+ * Servlet implementation class DeconnexionServlet
  */
-@WebServlet("/AjouterAmisServlet")
-public class AjouterAmisServlet extends HttpServlet {
+@WebServlet("/DeconnexionServlet")
+public class DeconnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjouterAmisServlet() {
+    public DeconnexionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +30,12 @@ public class AjouterAmisServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		SQLConnector sql=new SQLConnector();
 		HttpSession session = request.getSession();
-		UserBean u=(UserBean) session.getAttribute("current_user");
-		if(u==null || request.getParameter("idToAdd")==null) {
-			request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
-
-			
-		}
-		else {
-			try{
-				sql.addFriend(u.getId(),Integer.parseInt(request.getParameter("idToAdd")) );
-				sql.ajouterNotif(u.getId(), Integer.parseInt(request.getParameter("idToAdd")), 1);
-				request.getRequestDispatcher( "/include/affichageAmi.jsp" ).forward( request, response );
-			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
-
-			}
-			
-
-		}	}
+		//UserBean u=(UserBean) session.getAttribute("current_user");
+		session.setAttribute("current_user", null);
+		request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

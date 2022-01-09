@@ -4,8 +4,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateTables {
+	private Statement stmt = null;
 	
-	public void create(Statement stmt) {
+	public CreateTables(Statement stmt) {
+		this.stmt = stmt;
+	}
+	
+	public void create() {
 		String rqFriendship = "CREATE TABLE IF NOT EXISTS `friendship` (\n"
 				 + "  `id` int(255) NOT NULL AUTO_INCREMENT,\n"
 				 + "  `userId1` int(255) NOT NULL,\n"
@@ -119,23 +124,6 @@ public class CreateTables {
 				+ "  KEY `ville_population_2010` (`ville_population_2010`),\n"
 				+ "  KEY `ville_nom_simple` (`ville_nom_simple`)\n"
 				+ ") ENGINE=MyISAM AUTO_INCREMENT=36831 DEFAULT CHARSET=utf8;";
-		
-		try {
-			stmt.executeUpdate(rqFriendship);
-			stmt.executeUpdate(rqStatus);
-			stmt.executeUpdate(rqUser);
-			stmt.executeUpdate(rqNotif);
-			stmt.executeUpdate(rqAct);
-			stmt.executeUpdate(rqCovid);
-			stmt.executeUpdate(rqLieu);
-			stmt.executeUpdate(rqVillesFr);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void insert(Statement stmt) {
 		String rqFriendshipIns = "INSERT INTO `friendship` (`id`, `userId1`, `userId2`, `status`, `createdAt`) VALUES\n"
 				+ "(52, 17, 19, 2, '2022-01-08 17:19:25'),\n"
 				+ "(53, 19, 17, 2, '2022-01-08 17:19:25'),\n"
@@ -270,16 +258,33 @@ public class CreateTables {
 				+ "COMMIT;\r\n";
 		
 		try {
+			stmt.executeUpdate(rqFriendship);
 			stmt.executeUpdate(rqFriendshipIns);
+			stmt.executeUpdate(rqStatus);
 			stmt.executeUpdate(rqStatusIns);
+			stmt.executeUpdate(rqUser);
+			stmt.executeUpdate(rqNotif);
+			stmt.executeUpdate(rqAct);
 			stmt.executeUpdate(rqActIns);
+			stmt.executeUpdate(rqCovid);
 			stmt.executeUpdate(rqCovidIns);
+			stmt.executeUpdate(rqLieu);
 			stmt.executeUpdate(rqLieuIns);
+			stmt.executeUpdate(rqVillesFr);
 			stmt.executeUpdate(rqVillesFrIns);
+			
+			
+			
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void insert() {
+		
 		
 	}
 }

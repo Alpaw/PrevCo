@@ -47,6 +47,7 @@ public class DeleteFriendServlet extends HttpServlet {
 		}
 		else {
 			try{
+				
 				sql.deleteFriend(u.getId(),Integer.parseInt(request.getParameter("idToDelete")) );
 				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
