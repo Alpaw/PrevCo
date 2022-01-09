@@ -12,16 +12,16 @@ import BeanPackage.UserBean;
 import sql.SQLConnector;
 
 /**
- * Servlet implementation class SupprimerUser
+ * Servlet implementation class SupprimerCovid
  */
-@WebServlet("/SupprimerUser")
-public class SupprimerUser extends HttpServlet {
+@WebServlet("/SupprimerCovid")
+public class SupprimerCovid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupprimerUser() {
+    public SupprimerCovid() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +39,7 @@ public class SupprimerUser extends HttpServlet {
 		//TODO Vérifier que l'user est bien admin
 		
 		if(u==null || request.getParameter("idToDelete")==null) {
-			request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "include/landing.jsp" ).forward( request, response );
 
 			
 		}
@@ -51,18 +51,16 @@ public class SupprimerUser extends HttpServlet {
 				//sql.deleteFriend(u.getId(),Integer.parseInt(request.getParameter("idToDelete")) );
 				
 			
-				if(u.getId()!=Integer.parseInt(request.getParameter("idToDelete"))) {
-					sql.deleteUser(Integer.parseInt(request.getParameter("idToDelete")));
-				}
-				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
+					sql.deleteCovid(Integer.parseInt(request.getParameter("idToDelete")));
+				request.getRequestDispatcher( "/admin_dashboard/covid.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/admin_dashboard/covid.jsp" ).forward( request, response );
 
 			}
 			
 
 		}else {
-			request.getRequestDispatcher( "/admin_dashboard/landing.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "/admin_dashboard/login.jsp" ).forward( request, response );
 
 		}
 	}

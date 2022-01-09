@@ -49,7 +49,7 @@ public class AjouterActiviteServlet extends HttpServlet {
 
 		}else {
 			sql.ajouterActivite(hiddenLieuChoix, hiddenAdresseChoix, hiddenVilleChoix, dateStart, hDebut, hFin, 19);
-			request.getRequestDispatcher( "/include/affichageLieu.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
 		}
 
 

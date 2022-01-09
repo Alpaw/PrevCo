@@ -293,6 +293,19 @@ public class SQLConnector {
 
 		   }
 		   
+		   public void deleteCovid(int id) {
+			   String req="DELETE FROM coviduser WHERE  ID="+id+"";
+				doUpdate(req);
+				
+
+		   }
+		   
+		   public void deleteActivite(int id) {
+			   String req="DELETE FROM activite WHERE  ID="+id+"";
+				doUpdate(req);
+				
+
+		   }
 		   
 		   public void confirmFriend(int id1, int id2) {
 			   String req="DELETE FROM FRIENDSHIP WHERE  USERID1='"+id2+"' AND userid2='"+id1+"' AND STATUS='1'";
@@ -573,7 +586,7 @@ public class SQLConnector {
 					v.setLongitude(rs.getFloat("lng"));
 					v.setAdresse(rs.getString("adresse"));
 					v.setVille(rs.getString("ville"));
-
+					v.setId(rs.getInt("id"));
 					
 					list.add(v);
 
@@ -656,6 +669,44 @@ public class SQLConnector {
 					
 					a.setDate(rs.getDate("date").toString());;
 
+					list.add(a);
+
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			return list;
+		}
+		
+		
+		public ArrayList<ActiviteBean> getAllActivite(){
+			ArrayList<ActiviteBean> list=new ArrayList<ActiviteBean>();
+			
+			
+			String rq="SELECT * FROM ACTIVITE ";
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					ActiviteBean a=new ActiviteBean();
+				
+					
+					
+					a.setAdresse(rs.getString("adresse"));;
+					a.setNom(rs.getString("nom"));;
+					a.setVille(rs.getString("ville"));;
+					a.setDebut(rs.getTime("debut").toString());;
+					a.setFin(rs.getTime("fin").toString());;
+					
+					a.setDate(rs.getDate("date").toString());;
+					a.setUserId(rs.getInt("userId"));
+					
+					a.setId(rs.getInt("id"));
 					list.add(a);
 
 				
@@ -798,4 +849,53 @@ public class SQLConnector {
 			String req="INSERT INTO `coviduser`(`id`, `userId`, `heure`, `date`) VALUES (0,"+id+",CURRENT_TIMESTAMP,'"+date+"')";
 			doUpdate(req);
 		}
+		
+		public ArrayList<UserBean> getAllCovid() {
+			ArrayList<UserBean> list= new ArrayList<UserBean>();
+			String req= "select * from coviduser c,user u where c.userid=u.id";
+			System.out.println(req);
+			ResultSet rs=doRequest(req);
+			try {
+				while(rs.next()) {
+					UserBean u = new UserBean();
+					u.setNom(rs.getString("nom"));
+					u.setPrenom(rs.getString("prenom"));
+					u.setDate(rs.getDate("date_creation"));
+					u.setUsername(rs.getString("username"));
+					u.setEmail(rs.getString("email"));
+					u.setId(rs.getInt("id"));
+					u.setRang(rs.getString("role"));
+					u.setHeure(rs.getTime("heure").toString());
+					u.setCovid(rs.getDate("date").toString());
+					
+					list.add(u);
+ 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return list;
+		}
+
+
+
+		public void deleteLieu(int id) {
+			
+			ArrayList<VilleBean> allLieu= getAllLieu();
+			
+			for(VilleBean v : allLieu) {
+				if(v.getId()==id) {
+					//On a trouv� le lieu on le supprime
+					String req="DELETE FROM lieu  WHERE  id="+id+"";
+					String req1="DELETE FROM activite WHERE '"+v.getAdresse().replace("'", "''")+"'=adresse and '"+v.getNom().replace("'","''")+"'=nom and '"+v.getVille().replace("'", "''")+"'=ville";
+					doUpdate(req);
+					doUpdate(req1);
+				}
+			}
+		}
+		
+		
+		
+	
 }

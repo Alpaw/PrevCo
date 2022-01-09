@@ -183,7 +183,7 @@ if(session.getAttribute("current_user")==null){
           <span>Notifications</span>
         </a>
       </li>
-       
+      
       <li>
         <div class="switch">
           <input type="checkbox" id="mode" checked>
@@ -204,11 +204,11 @@ if(session.getAttribute("current_user")==null){
 </header>
 <section class="page-content">
   <section class="search-and-user">
-
+   
     <div class="admin-profile">
       <span class="greeting">Hello admin</span>
       <div class="notifications">
-        <span class="badge"></span>
+        <span class="badge">1</span>
         <svg>
           <use xlink:href="#users"></use>
         </svg>
@@ -235,9 +235,11 @@ if(session.getAttribute("current_user")==null){
                             <thead>
                                 <tr>
                                 <th><span>User</span></th>
-                                <th><span>Created</span></th>
-                                <th class="text-center"><span>Username</span></th>
-                                <th><span>Email</span></th>
+                                <th><span>Adresse</span></th>
+                                <th class="text-center"><span>Ville</span></th>
+								<th><span>Date</span></th>
+                                
+                                
 
                                 <th>&nbsp;</th>
                                 </tr>
@@ -268,36 +270,37 @@ if(session.getAttribute("current_user")==null){
                             //On va afficher les users ici 
                             
                             SQLConnector sql = new SQLConnector();
-                            ArrayList<UserBean> list = sql.getAllUsers();
+                            
+                            //List= liste de toute les notifications
+                            ArrayList<ActiviteBean> list = sql.getAllActivite();
                             UserBean user=(UserBean) session.getAttribute("current_user");
-                            for(UserBean u: list){                            	
-                            	Random r = new Random();
-                        		int rand =r.nextInt((3 - 1) + 1) + 1;
+                            int cpt=0;
+                            for(ActiviteBean a: list){                            	
+                            	//Parcours des notifications pour savoir lesquelles afficher
+                            	UserBean us= sql.getFriend(a.getUserId());
                         		
-                        		if(u.getId()!=user.getId())
                             	out.print(
                             			"<tr>"+
                                         
                                         "<td>"+
                                         
                                         
-                                            "<img src='https://bootdey.com/img/Content/user_"+rand+".jpg' alt=''>"+
-                                            "<a class='user-link'>"+u.getNom()+" "+u.getPrenom()+"</a><br>"+
-                                            "<span class='user-subhead'>rôle : "+u.getRang()+"  id:"+u.getId()+"</span>"+
+                                            "<img src='https://picsum.photos/"+(100+cpt)+"' alt=''>"+
+                                            "<a class='user-link'>"+us.getNom()+" "+us.getPrenom()+"</a><br>"+
                                         "</td>"+
-                                        "<td>"+u.getDate()+"</td>"+
+                                        "<td>"+a.getAdresse()+"</td>"+
                                         "<td class='text-center'>"+
-                                            "<span class='label label-default'>"+u.getUsername()+"</span>"+
+                                            "<span class='label label-default'>"+a.getVille()+"</span>"+
                                         "</td>"+
                                         "<td>"+
-                                            "<a href='#'>"+u.getEmail()+"</a>"+
+                                            "<a >Le "+a.getDate()+" a "+a.getDebut()+" jusqu'a "+a.getFin()+"</a>"+
                                         "</td>"+
                                         "<td style='width: 20%;'>"+
                                         
-											"<form method='post' action='"+ request.getContextPath() +"/SupprimerUser' >"+
-											"<input type='hidden' value='"+u.getId()+"' name='idToDelete' > </input> "+
+											"<form method='post' action='"+ request.getContextPath() +"/SupprimerNotifications' >"+
+											"<input type='hidden' value='"+a.getId()+"' name='idToDelete' > </input> "+
 											
-                                            "<button type='submit' class='btn btn-outline-danger'>Delete User</button>"+
+                                            "<button type='submit' class='btn btn-outline-danger'>Supprimer ce lieu </button>"+
                                                 
                                                     
                                                     "</form>"+
@@ -307,6 +310,7 @@ if(session.getAttribute("current_user")==null){
                                         "</td>"+
                                     "</tr>"
                                     );
+                            	cpt++;
                             	
                             	
                             	

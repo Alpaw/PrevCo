@@ -12,16 +12,16 @@ import BeanPackage.UserBean;
 import sql.SQLConnector;
 
 /**
- * Servlet implementation class SupprimerUser
+ * Servlet implementation class SupprimerNotifications
  */
-@WebServlet("/SupprimerUser")
-public class SupprimerUser extends HttpServlet {
+@WebServlet("/SupprimerNotifications")
+public class SupprimerNotifications extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SupprimerUser() {
+    public SupprimerNotifications() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,6 @@ public class SupprimerUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		SQLConnector sql=new SQLConnector();
 		HttpSession session = request.getSession();
 		UserBean u=(UserBean) session.getAttribute("current_user");
@@ -39,7 +38,7 @@ public class SupprimerUser extends HttpServlet {
 		//TODO Vérifier que l'user est bien admin
 		
 		if(u==null || request.getParameter("idToDelete")==null) {
-			request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "include/landing.jsp" ).forward( request, response );
 
 			
 		}
@@ -51,20 +50,20 @@ public class SupprimerUser extends HttpServlet {
 				//sql.deleteFriend(u.getId(),Integer.parseInt(request.getParameter("idToDelete")) );
 				
 			
-				if(u.getId()!=Integer.parseInt(request.getParameter("idToDelete"))) {
-					sql.deleteUser(Integer.parseInt(request.getParameter("idToDelete")));
-				}
-				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
+				//On supprime la notification ici
+					sql.deleteActivite(Integer.parseInt(request.getParameter("idToDelete")));
+				request.getRequestDispatcher( "/admin_dashboard/notification.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/admin_dashboard/notification.jsp" ).forward( request, response );
 
 			}
 			
 
 		}else {
-			request.getRequestDispatcher( "/admin_dashboard/landing.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "/admin_dashboard/login.jsp" ).forward( request, response );
 
-		}
+		}	
+		
 	}
 
 	/**

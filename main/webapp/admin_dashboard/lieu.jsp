@@ -172,7 +172,7 @@ if(session.getAttribute("current_user")==null){
           <svg>
             <use xlink:href="#collection"></use>
           </svg>
-          <span>Activites</span>
+          <span>Activite</span>
         </a>
       </li>
       <li>
@@ -183,7 +183,7 @@ if(session.getAttribute("current_user")==null){
           <span>Notifications</span>
         </a>
       </li>
-       
+      
       <li>
         <div class="switch">
           <input type="checkbox" id="mode" checked>
@@ -234,10 +234,11 @@ if(session.getAttribute("current_user")==null){
                         <table class="table user-list">
                             <thead>
                                 <tr>
-                                <th><span>User</span></th>
-                                <th><span>Created</span></th>
-                                <th class="text-center"><span>Username</span></th>
-                                <th><span>Email</span></th>
+                                <th><span>Lieu</span></th>
+                                <th><span>Adresse</span></th>
+                                <th class="text-center"><span>Ville</span></th>
+                                                                <th><span>Latitude Longitude</span></th>
+                                
 
                                 <th>&nbsp;</th>
                                 </tr>
@@ -268,36 +269,35 @@ if(session.getAttribute("current_user")==null){
                             //On va afficher les users ici 
                             
                             SQLConnector sql = new SQLConnector();
-                            ArrayList<UserBean> list = sql.getAllUsers();
+                            ArrayList<VilleBean> list = sql.getAllLieu();
                             UserBean user=(UserBean) session.getAttribute("current_user");
-                            for(UserBean u: list){                            	
+                            int cpt=0;
+                            for(VilleBean v: list){                            	
                             	Random r = new Random();
                         		int rand =r.nextInt((3 - 1) + 1) + 1;
                         		
-                        		if(u.getId()!=user.getId())
                             	out.print(
                             			"<tr>"+
                                         
                                         "<td>"+
                                         
                                         
-                                            "<img src='https://bootdey.com/img/Content/user_"+rand+".jpg' alt=''>"+
-                                            "<a class='user-link'>"+u.getNom()+" "+u.getPrenom()+"</a><br>"+
-                                            "<span class='user-subhead'>rôle : "+u.getRang()+"  id:"+u.getId()+"</span>"+
+                                            "<img src='https://picsum.photos/"+(100+cpt)+"' alt=''>"+
+                                            "<a class='user-link'>"+v.getNom()+"</a><br>"+
                                         "</td>"+
-                                        "<td>"+u.getDate()+"</td>"+
+                                        "<td>"+v.getAdresse()+"</td>"+
                                         "<td class='text-center'>"+
-                                            "<span class='label label-default'>"+u.getUsername()+"</span>"+
+                                            "<span class='label label-default'>"+v.getVille()+"</span>"+
                                         "</td>"+
                                         "<td>"+
-                                            "<a href='#'>"+u.getEmail()+"</a>"+
+                                            "<a >"+v.getLatitude()+" "+v.getLongitude()+"</a>"+
                                         "</td>"+
                                         "<td style='width: 20%;'>"+
                                         
-											"<form method='post' action='"+ request.getContextPath() +"/SupprimerUser' >"+
-											"<input type='hidden' value='"+u.getId()+"' name='idToDelete' > </input> "+
+											"<form method='post' action='"+ request.getContextPath() +"/SupprimerLieu' >"+
+											"<input type='hidden' value='"+v.getId()+"' name='idToDelete' > </input> "+
 											
-                                            "<button type='submit' class='btn btn-outline-danger'>Delete User</button>"+
+                                            "<button type='submit' class='btn btn-outline-danger'>Supprimer ce lieu </button>"+
                                                 
                                                     
                                                     "</form>"+
@@ -307,6 +307,7 @@ if(session.getAttribute("current_user")==null){
                                         "</td>"+
                                     "</tr>"
                                     );
+                            	cpt++;
                             	
                             	
                             	

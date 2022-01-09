@@ -10,6 +10,7 @@ public class ActiviteBean {
 	
 	private int userId;
 	
+	private int id;
 	
 	public String getAdresse() {
 		return adresse;
@@ -52,6 +53,12 @@ public class ActiviteBean {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

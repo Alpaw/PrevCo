@@ -335,15 +335,19 @@ if(session.getAttribute("current_user")==null){
 
 
                                                             <%
+                                                            int uFtmp=-1;
                                                         ArrayList<ActiviteBean> listActFriends=sql.getFriendsActivity(u.getId());
                                                         int cpt=0;
                                                         for(ActiviteBean act : listActFriends){
                                                         	UserBean uF  = sql.getFriend(act.getUserId());
+                                                        	if(uFtmp==-1){
+                                                        		uFtmp=uF.getId();
+                                                        	}
                                                         	out.print(
                                                         	"<div class='user-post'>"+
                                                             "<div class='friend-info'>"+
                                                                 "<figure>"+
-                                                                    "<img src='https://picsum.photos/"+(cpt+60)+" alt=''>"+
+                                                                    "<img src='https://picsum.photos/"+(cpt+40)+"/"+(cpt+39)+"' alt=''>"+
                                                                 "</figure>"+
                                                                 "<div class='friend-name'>"+
                                                                     "<ins>"+
@@ -361,7 +365,14 @@ if(session.getAttribute("current_user")==null){
 	                                                                "</div>"+
 	                                                            "</div>"+
 	                                                        "</div>");
+                                                        	
+                                                        	
+                                                        	if(uFtmp!=uF.getId()){
                                                         	cpt++;
+                                                        	}else{
+                                                        		cpt++;
+                                                        		uFtmp=uF.getId();
+                                                        	}
                                                         	
                                                         	
                                                         }
