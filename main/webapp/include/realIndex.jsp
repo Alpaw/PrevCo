@@ -89,13 +89,12 @@
 									work educations</a></li>
 							<li><a href="messages.html" title="">message box</a></li>
 							<li><a href="inbox.html" title="">Inbox</a></li>
-							<li><a href="notifications.html" title="">notifications
-									page</a></li>
+							<li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
 						</ul></li>
 					<li><span>forum</span>
 						<ul>
 							<li><a href="forum.html" title="">Forum Page</a></li>
-							<li><a href="forums-category.html" title="">Fourm
+							<li><a href="forums-category.html" title="">Forum
 									Category</a></li>
 							<li><a href="forum-open-topic.html" title="">Forum Open
 									Topic</a></li>

@@ -30,6 +30,8 @@ if(session.getAttribute("current_user")!=null){
 	request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
 
 }
+
+
 if(request.getAttribute("notCo")!=null){
 	if((int)request.getAttribute("notCo")==0){
 		request.setAttribute("notCo", 1);

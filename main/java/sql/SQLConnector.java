@@ -2,10 +2,15 @@ package sql;
 
 import BeanPackage.ActiviteBean;
 import BeanPackage.Friend;
+
+import BeanPackage.NotificationBean;
 import BeanPackage.UserBean;
 import BeanPackage.VilleBean;
 
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,63 +18,27 @@ import java.util.List;
 
 public class SQLConnector {
 	
-		public SQLConnector() { }
-
+		public SQLConnector() {
+			
+		}
 		
-
 		public void createTables() {
 			Connection con = connect();
-
 			Statement stmt;
 			try {
 				stmt = con.createStatement();
-
-				String rqFriendship = "CREATE TABLE IF NOT EXISTS `friendship` (\n"
-						 + "  `id` int(255) NOT NULL AUTO_INCREMENT,\n"
-						 + "  `userId1` int(255) NOT NULL,\n"
-						 + "  `userId2` int(255) NOT NULL,\n"
-						 + "  `status` int(255) NOT NULL,\n"
-						 + "  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n"
-						 + "  PRIMARY KEY (`id`)\n"
-						 + ") ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;"
-						 ;
-				String rqStatus = "CREATE TABLE IF NOT EXISTS `status` (\n"
-						+ "  `id` int(255) NOT NULL UNIQUE,\n"
-						+ "  `status` varchar(255) COLLATE utf8_bin NOT NULL\n"
-						+ ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;"
-						;
 				
-				String rqStatusIns = "INSERT INTO `status` (`id`, `status`) VALUES\n"
-						+ "(1, 'request send'),\n"
-						+ "(2, 'friends'),\n"
-						+ "(3, 'request cancelled');";
+				CreateTables tables = new CreateTables();
+				tables.create(stmt);
+				tables.insert(stmt);
 				
-				String rqUser = "CREATE TABLE IF NOT EXISTS `user` (\n"
-						+ "  `id` bigint(20) NOT NULL AUTO_INCREMENT,\n"
-						+ "  `username` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `email` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `password` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `date_creation` date NOT NULL,\n"
-						+ "  `nom` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `role` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `sexe` varchar(10) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `prenom` varchar(255) COLLATE utf8_bin NOT NULL,\n"
-						+ "  `naissance` date NOT NULL,\n"
-						+ "  PRIMARY KEY (`id`),\n"
-						+ "  UNIQUE KEY `email` (`email`)\n"
-						+ ") ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
-				
-				stmt.executeUpdate(rqFriendship);
-				stmt.executeUpdate(rqStatus);
-				stmt.executeUpdate(rqStatusIns);
-				stmt.executeUpdate(rqUser);
-				
-			    con.close();
+				con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+
 		
 		
 		public boolean userExist(String email) {
@@ -198,21 +167,21 @@ public class SQLConnector {
 			         arret("Impossible de charger le pilote jdbc : "+e);
 			   }
 
-			 //  affiche("connexion a la base de donnÈes");
+			 //  affiche("connexion a la base de donn√©es");
 			   
 			   try {
 			         String DBurl = "jdbc:mysql://localhost:3306/prevco";
 			         con = DriverManager.getConnection(DBurl,"root","");
-			       //  affiche("connexion rÈussie");
+			       //  affiche("connexion r√©ussie");
 			   } 
 			   catch (SQLException e) {
-			         arret("Connection ‡ la base de donnÈes impossible");
+			         arret("Connection √† la base de donn√©es impossible");
 			   }
 			   
 			   return con;
 		   }
 		   
-		    public static void main (String[] args) {
+		   public static void main (String[] args) {
 			   connect();
 		   }
 		   
@@ -232,13 +201,12 @@ public class SQLConnector {
 			   ArrayList<Friend> res=new ArrayList<Friend>();
 			   //Status=2 friend
 			   String req="SELECT * FROM FRIENDSHIP WHERE USERID1='"+idUser+"' AND STATUS='2'";
-			   
 			  // System.out.println("Je fais la requete : "+ req);
 			   ResultSet rs=doRequest(req);
 			   
 			   try {
 				while(rs.next()) {
-					//Ici on rÈcupËre les infos de l'user avec qui il est ami
+					//Ici on r√©cup√®re les infos de l'user avec qui il est ami
 					req="SELECT nom,prenom,id,username,role FROM USER WHERE id='"+rs.getInt("userId2")+"'";
 					ResultSet rsF=doRequest(req);
 					  // System.out.println("Je fais la requete 2 : "+ req);
@@ -254,7 +222,7 @@ public class SQLConnector {
 						f.setRole(rsF.getString("role"));
 
 						res.add(f);
-						
+
 					}
 
 				   }
@@ -269,42 +237,6 @@ public class SQLConnector {
 		   }
 		   
 		   
-		   
-		   
-		   public ArrayList<Friend> getOneFriend(int idUser){
-			   ArrayList<Friend> res=new ArrayList<Friend>();
-			  
-					//Ici on rÈcupËre les infos de l'user avec qui il est ami
-					String req="SELECT nom,prenom,id,username,role FROM USER WHERE id="+idUser+"";
-					ResultSet rsF=doRequest(req);
-					 try {
-						if(rsF.next()) {
-						
-						Friend f=new Friend();
-							f.setId(rsF.getInt("id"));;
-							f.setNom(rsF.getString("nom"));
-							f.setPrenom(rsF.getString("prenom"));
-							f.setUsername(rsF.getString("username"));
-							f.setRole(rsF.getString("role"));
-
-							res.add(f);
-							
-						
-
-   }
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			
-			   
-			   
-			   return res;
-			   
-		   }
-		   
-		   
-		   
 		   public ArrayList<Friend> getFriendsRequest(int idUser){
 			   ArrayList<Friend> res=new ArrayList<Friend>();
 			   //Status=2 friend
@@ -314,7 +246,7 @@ public class SQLConnector {
 			   
 			   try {
 				while(rs.next()) {
-					//Ici on rÈcupËre les infos de l'user qui lui a envoye la request
+					//Ici on r√©cup√®re les infos de l'user qui lui a envoye la request
 					req="SELECT nom,prenom,id,username,role FROM USER WHERE id='"+rs.getInt("userId1")+"'";
 					ResultSet rsF=doRequest(req);
 				//	   System.out.println("Je fais la requete 2 : "+ req);
@@ -358,8 +290,6 @@ public class SQLConnector {
 		   public void deleteUser(int id) {
 			   String req="DELETE FROM USER WHERE  ID='"+id+"'";
 				doUpdate(req);
-				String req1="DELETE FROM FRIENDSHIP WHERE  USERID1='"+id+"' OR userid2='"+id+"' ";
-				doUpdate(req1);
 
 		   }
 		   
@@ -375,7 +305,7 @@ public class SQLConnector {
 			   doUpdate(req1);
 			   req1="INSERT INTO FRIENDSHIP (`id`, `userId1`, `userId2`, `status`, `createdAt`) VALUES (0,'"+id2+"','"+id1+"','2',CURRENT_TIMESTAMP)";
 			   doUpdate(req1);
-
+			   
 
 		   }
 
@@ -389,6 +319,38 @@ public class SQLConnector {
 			   doUpdate(req1);
 
 		}
+		
+		public ArrayList<Friend> getOneFriend(int idUser){
+			   ArrayList<Friend> res=new ArrayList<Friend>();
+			  
+					//Ici on r√©cup√®re les infos de l'user avec qui il est ami
+					String req="SELECT nom,prenom,id,username,role FROM USER WHERE id="+idUser+"";
+					ResultSet rsF=doRequest(req);
+					 try {
+						if(rsF.next()) {
+						
+						Friend f=new Friend();
+							f.setId(rsF.getInt("id"));;
+							f.setNom(rsF.getString("nom"));
+							f.setPrenom(rsF.getString("prenom"));
+							f.setUsername(rsF.getString("username"));
+							f.setRole(rsF.getString("role"));
+
+							res.add(f);
+							
+						
+
+}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			
+			   
+			   
+			   return res;
+			   
+		   }
 		
 		public UserBean getFriend(int id) {
 			
@@ -434,22 +396,24 @@ public class SQLConnector {
 		
 		
 		public void addFriend(int id1,int id2) {
-			//VÈrifier si id2 a deja envoyÈ une demande d'ami, si oui on les ajoutes en amis
+			//V√©rifier si id2 a deja envoy√© une demande d'ami, si oui on les ajoutes en amis
 			   String rqString = "SELECT * FROM FRIENDSHIP WHERE USERID1='"+id2+"' AND STATUS='1'";
 			   ResultSet resultSet = doRequest(rqString);
 			   
 			   
 			   try {
 				if (!resultSet.isBeforeFirst() ) {    
-					   //No date donc il n'a pas encore envoyÈ de demande
+					   //No date donc il n'a pas encore envoy√© de demande
 					   String req1="INSERT INTO FRIENDSHIP (`id`, `userId1`, `userId2`, `status`, `createdAt`) VALUES (0,'"+id1+"','"+id2+"','1',CURRENT_TIMESTAMP)";
 						//Sinon on envoie la demande depuis id1 vers id2
 						doUpdate(req1);
+						
 						
 						   
 					} else {
 						confirmFriend(id1,id2);
 						confirmFriend(id2,id1);
+						
 					}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -478,6 +442,7 @@ public class SQLConnector {
 		public ArrayList<UserBean> getAllUsers(){
 			ArrayList<UserBean> list=new ArrayList<UserBean>();
 			
+			SQLConnector sql=new SQLConnector();
 			String rq="SELECT * FROM USER ";
 			ResultSet rs= doRequest(rq);
 			
@@ -508,7 +473,6 @@ public class SQLConnector {
 			return list;
 		}
 		
-		
 		public ArrayList<VilleBean> getAllVille(){
 			ArrayList<VilleBean> list= new ArrayList<VilleBean>();
 			
@@ -536,8 +500,39 @@ public class SQLConnector {
 			
 		}
 		
+		public ArrayList<NotificationBean> getAllNotifs(int idUser){
+			ArrayList<NotificationBean> list= new ArrayList<NotificationBean>();
+			
+			String rq="SELECT * FROM notifications WHERE userId2="+idUser;
+			ResultSet rs= doRequest(rq);
+			
+			try {
+				while(rs.next()) {
+					NotificationBean notif = new NotificationBean();
+					
+					notif.setSendBy(rs.getInt("userId1"));
+					notif.setType(rs.getInt("type"));
+					notif.setDate(rs.getTimestamp("createdAt"));
+					
+					list.add(notif);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return list;
+		}
+		
+		public void removeNotif(int autoId) {
+			String req="DELETE FROM notifications WHERE autoId='"+autoId+"'";
+			System.out.println("REQUETE / "+req);
+			doUpdate(req);
+			
+		}
 		public boolean ajouterLieu(String nom, String adresse,String ville,float lat,float lng) {
-			//On vÈrifie que le lieu n'existe pas dÈj‡ 
+			//On v√©rifie que le lieu n'existe pas d√©j√† 
 			
 			 String rqString = "SELECT * FROM LIEU WHERE nom='"+nom+"' AND adresse='"+adresse+"'";
 			   ResultSet resultSet = doRequest(rqString);
@@ -803,6 +798,4 @@ public class SQLConnector {
 			String req="INSERT INTO `coviduser`(`id`, `userId`, `heure`, `date`) VALUES (0,"+id+",CURRENT_TIMESTAMP,'"+date+"')";
 			doUpdate(req);
 		}
-		
-	
 }

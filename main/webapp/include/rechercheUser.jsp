@@ -186,7 +186,7 @@
                                                         <ul class="naves">
                                                             <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath() %>/newsfeed.jsp" title="">News feed</a></li>
                                                             <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
-                                                            <li><i class="ti-bell"></i> <a href="notifications.html" title="">Notifications</a></li>
+                                                            <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
                                                             <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
                                                         </ul>
                                                     </div>

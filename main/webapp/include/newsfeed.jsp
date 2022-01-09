@@ -72,67 +72,12 @@ if(session.getAttribute("current_user")==null){
 
                             <div class="top-area">
 
-                                <ul class="setting-area">
-
-
-                                    <li>
-                                        <a href="#" title="Notification" data-ripple=""> <i class="ti-bell"></i><span>20</span>
-                                        </a>
-                                        <div class="dropdowns">
-                                            <span>4 New Notifications</span>
-                                            <ul class="drops-menu">
-                                                <li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-1.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>sarah Loren</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag green">New</span></li>
-                                                <li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-2.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Jhon doe</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag red">Reply</span></li>
-                                                <li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-3.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Andrew</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag blue">Unseen</span></li>
-                                                <li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-4.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Tom cruse</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag">New</span></li>
-                                                <li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-5.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Amy</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag">New</span></li>
-                                            </ul>
-                                            <a href="notifications.html" title="" class="more-mesg">view
-								more</a>
-                                        </div>
-                                    </li>
-
-                                </ul>
+                               
                                 <div class="user-img">
                                     <img src="https://picsum.photos/60/60" alt=""> <span class="status f-online"></span>
 
                                 </div>
-                                <span class="ti-menu main-menu" data-ripple=""></span>
+
                             </div>
                         </div>
                         <!-- topbar -->
@@ -151,7 +96,7 @@ if(session.getAttribute("current_user")==null){
                                                                 <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath()%>/include/newsfeed.jsp" title="">News feed</a></li>
                                                                 <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
 
-                                                                <li><i class="ti-bell"></i> <a href="notifications.html" title="">Notifications</a></li>
+                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
                                                                 <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
                                                             </ul>
                                                         </div>

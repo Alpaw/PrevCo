@@ -35,7 +35,7 @@ public class Notification extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		UserBean u=(UserBean) session.getAttribute("current_user");
-		request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
+		request.getRequestDispatcher( "/include/notifications.jsp" ).forward( request, response );
 	}
 
 	/**
