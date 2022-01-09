@@ -178,7 +178,7 @@ if(session.getAttribute("friend_to_show")==null){
 															"<input type='hidden'" +" value='"+usShow.getId()+"' name='idToCancel' "+"></input>"+
 																	"<input type='hidden'" +" value='"+1+"' name='redirectionPage' "+"></input>"+
 
-															"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>");
+															"<input type='submit'" +" value='Refuser la demande' class='add-butn' "+"></input>");
 
 
 														}else{
@@ -188,7 +188,7 @@ if(session.getAttribute("friend_to_show")==null){
 																//User qu'on affiche à déjà envoyé sa demande
 																out.print("<form method='post' action='"+ request.getContextPath() +"/AjouterAmisServlet' >"+
 																		"<input type='hidden' name='idToAdd' value='"+usShow.getId()+"'>"+
-																		"<input type='submit' class='underling' value='Add Friend'>  </input>"
+																		"<input type='submit' class='underling' value='Ajouter utilisateur'>  </input>"
 																		
 																		
 																		
@@ -199,7 +199,7 @@ if(session.getAttribute("friend_to_show")==null){
 																		"<input type='hidden'" +" value='"+usShow.getId()+"' name='idToCancel' "+"></input>"+
 																				"<input type='hidden'" +" value='"+1+"' name='redirectionPage' "+"></input>"+
 
-																		"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>"
+																		"<input type='submit'" +" value='Supprimer la demande' class='add-butn' "+"></input>"
 
 																		
 																
@@ -219,8 +219,6 @@ if(session.getAttribute("friend_to_show")==null){
 																		
 																
 																		);
-																
-																
 															}
 														
 														
@@ -315,7 +313,7 @@ if(session.getAttribute("friend_to_show")==null){
                                                             
                                                             	<%
                                                             	 sql=new SQLConnector();
-                                                            	 u = (UserBean) session.getAttribute("current_user");
+                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
                                                             	ArrayList<ActiviteBean> listAc= sql.getAllActiviteByUser(u.getId());
                                                             	
                                                             	int cptAct=0;

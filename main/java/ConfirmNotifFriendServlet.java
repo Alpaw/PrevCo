@@ -67,17 +67,16 @@ public class ConfirmNotifFriendServlet extends HttpServlet {
 		        System.out.println("date          : " + date);
 				*/
 				sql.confirmFriend(u.getId(),Integer.parseInt(request.getParameter("id2")) );
-				System.out.println("AUTOID / "+autoId);
 				sql.removeNotif(autoId);
 
-				request.getRequestDispatcher( "/include/notifications.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/include/notifications.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
 
 			}
 			
 		}
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
