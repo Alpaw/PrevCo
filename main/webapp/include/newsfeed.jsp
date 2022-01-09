@@ -183,11 +183,30 @@ if(session.getAttribute("current_user")==null){
                                                         <main>
                                                         
                                                         
-                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/JeSuisCovidServlet">
-										
-																<button type="submit" >JE SUIS POSITIF JE PREVIENS TOUT LE MONDE</button>
-																</form>
-
+  																
+  																<% if(!sql.verifCovid(u.getId())){
+  																	
+  																	
+  																	out.print("Vous etes positif, declarez vous negatif apres votre quarantaine.<br>"+
+  																			
+  																			"<form style='border-style: dashed solid;' action='"+request.getContextPath() +"/JeSuisPasCovidServlet'>"+
+  																	
+  																	"<button type='submit' >JE SUIS NEGATIF JE PREVIENS TOUT LE MONDE</button>"+
+  																	
+  																	"</form>");
+  																	
+  																	
+  																	
+  																}else{
+  																	out.print("<form style='border-style: dashed solid;' action='"+request.getContextPath() +"/JeSuisCovidServlet'>"+
+  		  																	
+  																	"<button type='submit' >JE SUIS POSITIF JE PREVIENS TOUT LE MONDE</button>"+
+  																	
+  																	"</form>");
+  																}
+  																
+  																%>
+  																
 
                                                             <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/RechercherUserServlet">
 																<input type="text" name="recherche">

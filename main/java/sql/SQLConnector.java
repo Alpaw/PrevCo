@@ -894,6 +894,13 @@ public class SQLConnector {
 				}
 			}
 		}
+
+		public void enleverCovid(int id) {
+			// TODO Auto-generated method stub
+			 String req="DELETE FROM coviduser WHERE  USERID="+id;
+				doUpdate(req);
+			
+		}
 		
 		
 		
