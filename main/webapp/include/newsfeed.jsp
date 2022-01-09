@@ -1,324 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+    <!DOCTYPE html>
+    <%@ page import="BeanPackage.*"%>
+
+        <%@ page import="sql.*"%>
+            <%@ page import="java.util.ArrayList"%>
 
 
-<head>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-	type="text/javascript"></script>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<title>Winku Social Network Toolkit</title>
-<link rel="icon"
-	href="<%= request.getContextPath() %>/template/images/fav.png"
-	type="image/png" sizes="16x16">
+                <head>
+                    <% 
+if(session.getAttribute("current_user")==null){
+	request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
 
+}
 
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/main.min.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/style.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/color.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/responsive.css">
-
-</head>
-<body>
-	<!--<div class="se-pre-con"></div>-->
-	<div class="theme-layout">
-
-		<div class="responsive-header">
-			<div class="mh-head first Sticky">
-				<span class="mh-btns-left"> <a class="" href="#menu"><i
-						class="fa fa-align-justify"></i></a>
-				</span> <span class="mh-text"> <a href="newsfeed.html" title=""><img
-						src="<%= request.getContextPath() %>/template/images/logo2.png"
-						alt=""></a>
-				</span> <span class="mh-btns-right"> <a class="fa fa-sliders"
-					href="#shoppingbag"></a>
-				</span>
-			</div>
-			<div class="mh-head second">
-				<form class="mh-form">
-					<input placeholder="search" /> <a href="#/" class="fa fa-search"></a>
-				</form>
-			</div>
-			<nav id="menu" class="res-menu">
-				<ul>
-					<li><span>Home</span>
-						<ul>
-							<li><a href="index-2.html" title="">Home Social</a></li>
-							<li><a href="index2.html" title="">Home Social 2</a></li>
-							<li><a href="index-company.html" title="">Home Company</a></li>
-							<li><a href="landing.html" title="">Login page</a></li>
-							<li><a href="logout.html" title="">Logout Page</a></li>
-							<li><a href="newsfeed.html" title="">news feed</a></li>
-						</ul></li>
-					<li><span>Time Line</span>
-						<ul>
-							<li><a href="time-line.html" title="">timeline</a></li>
-							<li><a
-								href="<%= request.getContextPath() %>/include/timelineFriends.jsp"
-								title="">timeline friends</a></li>
-							<li><a href="timeline-groups.html" title="">timeline
-									groups</a></li>
-							<li><a href="timeline-pages.html" title="">timeline
-									pages</a></li>
-							<li><a href="timeline-photos.html" title="">timeline
-									photos</a></li>
-							<li><a href="timeline-videos.html" title="">timeline
-									videos</a></li>
-							<li><a href="fav-page.html" title="">favourit page</a></li>
-							<li><a href="groups.html" title="">groups page</a></li>
-							<li><a href="page-likers.html" title="">Likes page</a></li>
-							<li><a href="people-nearby.html" title="">people nearby</a></li>
+%>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+                        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+                        <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
 
 
-						</ul></li>
-					<li><span>Account Setting</span>
-						<ul>
-							<li><a href="create-fav-page.html" title="">create fav
-									page</a></li>
-							<li><a href="edit-account-setting.html" title="">edit
-									account setting</a></li>
-							<li><a href="edit-interest.html" title="">edit-interest</a></li>
-							<li><a href="edit-password.html" title="">edit-password</a></li>
-							<li><a href="edit-profile-basic.html" title="">edit
-									profile basics</a></li>
-							<li><a href="edit-work-eductation.html" title="">edit
-									work educations</a></li>
-							<li><a href="messages.html" title="">message box</a></li>
-							<li><a href="inbox.html" title="">Inbox</a></li>
-							<li><a href="notifications.html" title="">notifications
-									page</a></li>
-						</ul></li>
-					<li><span>forum</span>
-						<ul>
-							<li><a href="forum.html" title="">Forum Page</a></li>
-							<li><a href="forums-category.html" title="">Fourm
-									Category</a></li>
-							<li><a href="forum-open-topic.html" title="">Forum Open
-									Topic</a></li>
-							<li><a href="forum-create-topic.html" title="">Forum
-									Create Topic</a></li>
-						</ul></li>
-					<li><span>Our Shop</span>
-						<ul>
-							<li><a href="shop.html" title="">Shop Products</a></li>
-							<li><a href="shop-masonry.html" title="">Shop Masonry
-									Products</a></li>
-							<li><a href="shop-single.html" title="">Shop Detail Page</a></li>
-							<li><a href="shop-cart.html" title="">Shop Product Cart</a></li>
-							<li><a href="shop-checkout.html" title="">Product
-									Checkout</a></li>
-						</ul></li>
-					<li><span>Our Blog</span>
-						<ul>
-							<li><a href="blog-grid-wo-sidebar.html" title="">Our
-									Blog</a></li>
-							<li><a href="blog-grid-right-sidebar.html" title="">Blog
-									with R-Sidebar</a></li>
-							<li><a href="blog-grid-left-sidebar.html" title="">Blog
-									with L-Sidebar</a></li>
-							<li><a href="blog-masonry.html" title="">Blog Masonry
-									Style</a></li>
-							<li><a href="blog-list-wo-sidebar.html" title="">Blog
-									List Style</a></li>
-							<li><a href="blog-list-right-sidebar.html" title="">Blog
-									List with R-Sidebar</a></li>
-							<li><a href="blog-list-left-sidebar.html" title="">Blog
-									List with L-Sidebar</a></li>
-							<li><a href="blog-detail.html" title="">Blog Post Detail</a></li>
-						</ul></li>
-					<li><span>Portfolio</span>
-						<ul>
-							<li><a href="portfolio-2colm.html" title="">Portfolio
-									2col</a></li>
-							<li><a href="portfolio-3colm.html" title="">Portfolio
-									3col</a></li>
-							<li><a href="portfolio-4colm.html" title="">Portfolio
-									4col</a></li>
-						</ul></li>
-					<li><span>Support & Help</span>
-						<ul>
-							<li><a href="support-and-help.html" title="">Support &
-									Help</a></li>
-							<li><a href="support-and-help-detail.html" title="">Support
-									& Help Detail</a></li>
-							<li><a href="support-and-help-search-result.html" title="">Support
-									& Help Search Result</a></li>
-						</ul></li>
-					<li><span>More pages</span>
-						<ul>
-							<li><a href="careers.html" title="">Careers</a></li>
-							<li><a href="career-detail.html" title="">Career Detail</a></li>
-							<li><a href="404.html" title="">404 error page</a></li>
-							<li><a href="404-2.html" title="">404 Style2</a></li>
-							<li><a href="faq.html" title="">faq's page</a></li>
-							<li><a href="insights.html" title="">insights</a></li>
-							<li><a href="knowledge-base.html" title="">knowledge
-									base</a></li>
-						</ul></li>
-					<li><a href="about.html" title="">about</a></li>
-					<li><a href="about-company.html" title="">About Us2</a></li>
-					<li><a href="contact.html" title="">contact</a></li>
-					<li><a href="contact-branches.html" title="">Contact Us2</a></li>
-					<li><a href="widgets.html" title="">Widgts</a></li>
-				</ul>
-			</nav>
-			<nav id="shoppingbag">
-				<div>
-					<div class="">
-						<form method="post">
-							<div class="setting-row">
-								<span>use night mode</span> <input type="checkbox"
-									id="nightmode" /> <label for="nightmode" data-on-label="ON"
-									data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Notifications</span> <input type="checkbox" id="switch2" />
-								<label for="switch2" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Notification sound</span> <input type="checkbox"
-									id="switch3" /> <label for="switch3" data-on-label="ON"
-									data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>My profile</span> <input type="checkbox" id="switch4" />
-								<label for="switch4" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Show profile</span> <input type="checkbox" id="switch5" />
-								<label for="switch5" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-						</form>
-						<h4 class="panel-title">Account Setting</h4>
-						<form method="post">
-							<div class="setting-row">
-								<span>Sub users</span> <input type="checkbox" id="switch6" /> <label
-									for="switch6" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>personal account</span> <input type="checkbox"
-									id="switch7" /> <label for="switch7" data-on-label="ON"
-									data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Business account</span> <input type="checkbox"
-									id="switch8" /> <label for="switch8" data-on-label="ON"
-									data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Show me online</span> <input type="checkbox" id="switch9" />
-								<label for="switch9" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Delete history</span> <input type="checkbox" id="switch10" />
-								<label for="switch10" data-on-label="ON" data-off-label="OFF"></label>
-							</div>
-							<div class="setting-row">
-								<span>Expose author name</span> <input type="checkbox"
-									id="switch11" /> <label for="switch11" data-on-label="ON"
-									data-off-label="OFF"></label>
-							</div>
-						</form>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<!-- responsive header -->
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-		<div class="topbar stick">
-			<div class="logo">
-				<a title="" href="newsfeed.jsp"><img
+                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+                        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <meta name="description" content="" />
+                        <meta name="keywords" content="" />
+                        <title>Winku Social Network Toolkit</title>
+                        <link rel="icon" href="<%= request.getContextPath() %>/template/images/fav.png" type="image/png" sizes="16x16">
+
+
+                        <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/main.min.css">
+                        <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/style.css">
+                        <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/color.css">
+                        <link rel="stylesheet" href="<%= request.getContextPath() %>/template/css/responsive.css">
+
+
+                        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+                        <!-- CSS -->
+                        <style>
+                            body {
+                                margin: 0
+                            }
+                            
+                            #maCarte {
+                                height: 100vh;
+                            }
+                        </style>
+
+
+                </head>
+
+
+
+
+                <body>
+                    <!--<div class="se-pre-con"></div>-->
+                    <div class="theme-layout">
+
+                        <!-- responsive header -->
+
+                        <div class="topbar stick">
+                            <div class="logo">
+                                <a title="" href="newsfeed.jsp"><img
 					src="<%= request.getContextPath() %>/template/images/logo.png"
 					alt=""></a>
-			</div>
+                            </div>
 
-			<div class="top-area">
-				<ul class="main-menu">
-					<li><a href="#" title="">Home</a>
-						<ul>
-							<li><a href="index-2.html" title="">Home Social</a></li>
-							<li><a href="index2.html" title="">Home Social 2</a></li>
-							<li><a href="index-company.html" title="">Home Company</a></li>
-							<li><a href="landing.html" title="">Login page</a></li>
-							<li><a href="logout.html" title="">Logout Page</a></li>
-							<li><a href="newsfeed.html" title="">news feed</a></li>
-						</ul></li>
-					<li><a href="#" title="">timeline</a>
-						<ul>
-							<li><a href="time-line.html" title="">timeline</a></li>
-							<li><a
-								href="<%= request.getContextPath() %>/include/timelineFriends.jsp"
-								title="">timeline friends</a></li>
-							<li><a href="timeline-groups.html" title="">timeline
-									groups</a></li>
-							<li><a href="timeline-pages.html" title="">timeline
-									pages</a></li>
-							<li><a href="timeline-photos.html" title="">timeline
-									photos</a></li>
-							<li><a href="timeline-videos.html" title="">timeline
-									videos</a></li>
-							<li><a href="fav-page.html" title="">favourit page</a></li>
-							<li><a href="groups.html" title="">groups page</a></li>
-							<li><a href="page-likers.html" title="">Likes page</a></li>
-							<li><a href="people-nearby.html" title="">people nearby</a></li>
-						</ul></li>
-					<li><a href="#" title="">account settings</a>
-						<ul>
-							<li><a href="create-fav-page.html" title="">create fav
-									page</a></li>
-							<li><a href="edit-account-setting.html" title="">edit
-									account setting</a></li>
-							<li><a href="edit-interest.html" title="">edit-interest</a></li>
-							<li><a href="edit-password.html" title="">edit-password</a></li>
-							<li><a href="edit-profile-basic.html" title="">edit
-									profile basics</a></li>
-							<li><a href="edit-work-eductation.html" title="">edit
-									work educations</a></li>
-							<li><a href="messages.html" title="">message box</a></li>
-							<li><a href="inbox.html" title="">Inbox</a></li>
-							<li><a href="notifications.html" title="">notifications
-									page</a></li>
-						</ul></li>
-					<li><a href="#" title="">more pages</a>
-						<ul>
-							<li><a href="404.html" title="">404 error page</a></li>
-							<li><a href="about.html" title="">about</a></li>
-							<li><a href="contact.html" title="">contact</a></li>
-							<li><a href="faq.html" title="">faq's page</a></li>
-							<li><a href="insights.html" title="">insights</a></li>
-							<li><a href="knowledge-base.html" title="">knowledge
-									base</a></li>
-							<li><a href="widgets.html" title="">Widgts</a></li>
-						</ul></li>
-				</ul>
-				<ul class="setting-area">
-					<li><a href="#" title="Home" data-ripple=""><i
-							class="ti-search"></i></a>
-						<div class="searched">
-							<form method="post" class="form-search">
-								<input type="text" placeholder="Search Friend">
-								<button data-ripple>
-									<i class="ti-search"></i>
-								</button>
-							</form>
-						</div></li>
-					<li><a href="newsfeed.html" title="Home" data-ripple=""><i
-							class="ti-home"></i></a></li>
-					<li><a href="#" title="Notification" data-ripple=""> <i
-							class="ti-bell"></i><span>20</span>
-					</a>
-						<div class="dropdowns">
-							<span>4 New Notifications</span>
-							<ul class="drops-menu">
-								<li><a href="notifications.html" title=""> <img
+                            <div class="top-area">
+
+                                <ul class="setting-area">
+
+
+                                    <li>
+                                        <a href="#" title="Notification" data-ripple=""> <i class="ti-bell"></i><span>20</span>
+                                        </a>
+                                        <div class="dropdowns">
+                                            <span>4 New Notifications</span>
+                                            <ul class="drops-menu">
+                                                <li><a href="notifications.html" title=""> <img
 										src="<%= request.getContextPath() %>/template/images/resources/thumb-1.jpg"
 										alt="">
 										<div class="mesg-meta">
@@ -326,7 +89,7 @@
 											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
 										</div>
 								</a> <span class="tag green">New</span></li>
-								<li><a href="notifications.html" title=""> <img
+                                                <li><a href="notifications.html" title=""> <img
 										src="<%= request.getContextPath() %>/template/images/resources/thumb-2.jpg"
 										alt="">
 										<div class="mesg-meta">
@@ -334,7 +97,7 @@
 											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
 										</div>
 								</a> <span class="tag red">Reply</span></li>
-								<li><a href="notifications.html" title=""> <img
+                                                <li><a href="notifications.html" title=""> <img
 										src="<%= request.getContextPath() %>/template/images/resources/thumb-3.jpg"
 										alt="">
 										<div class="mesg-meta">
@@ -342,7 +105,7 @@
 											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
 										</div>
 								</a> <span class="tag blue">Unseen</span></li>
-								<li><a href="notifications.html" title=""> <img
+                                                <li><a href="notifications.html" title=""> <img
 										src="<%= request.getContextPath() %>/template/images/resources/thumb-4.jpg"
 										alt="">
 										<div class="mesg-meta">
@@ -350,7 +113,7 @@
 											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
 										</div>
 								</a> <span class="tag">New</span></li>
-								<li><a href="notifications.html" title=""> <img
+                                                <li><a href="notifications.html" title=""> <img
 										src="<%= request.getContextPath() %>/template/images/resources/thumb-5.jpg"
 										alt="">
 										<div class="mesg-meta">
@@ -358,1425 +121,781 @@
 											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
 										</div>
 								</a> <span class="tag">New</span></li>
-							</ul>
-							<a href="notifications.html" title="" class="more-mesg">view
+                                            </ul>
+                                            <a href="notifications.html" title="" class="more-mesg">view
 								more</a>
-						</div></li>
-					<li><a href="#" title="Messages" data-ripple=""><i
-							class="ti-comment"></i><span>12</span></a>
-						<div class="dropdowns">
-							<span>5 New Messages</span>
-							<ul class="drops-menu">
-								<li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-1.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>sarah Loren</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag green">New</span></li>
-								<li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-2.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Jhon doe</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag red">Reply</span></li>
-								<li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-3.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Andrew</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag blue">Unseen</span></li>
-								<li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-4.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Tom cruse</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag">New</span></li>
-								<li><a href="notifications.html" title=""> <img
-										src="<%= request.getContextPath() %>/template/images/resources/thumb-5.jpg"
-										alt="">
-										<div class="mesg-meta">
-											<h6>Amy</h6>
-											<span>Hi, how r u dear ...?</span> <i>2 min ago</i>
-										</div>
-								</a> <span class="tag">New</span></li>
-							</ul>
-							<a href="messages.html" title="" class="more-mesg">view more</a>
-						</div></li>
-					<li><a href="#" title="Languages" data-ripple=""><i
-							class="fa fa-globe"></i></a>
-						<div class="dropdowns languages">
-							<a href="#" title=""><i class="ti-check"></i>English</a> <a
-								href="#" title="">Arabic</a> <a href="#" title="">Dutch</a> <a
-								href="#" title="">French</a>
-						</div></li>
-				</ul>
-				<div class="user-img">
-					<img
-						src="<%= request.getContextPath() %>/template/images/resources/admin.jpg"
-						alt=""> <span class="status f-online"></span>
-					<div class="user-setting">
-						<a href="#" title=""><span class="status f-online"></span>online</a>
-						<a href="#" title=""><span class="status f-away"></span>away</a> <a
-							href="#" title=""><span class="status f-off"></span>offline</a> <a
-							href="#" title=""><i class="ti-user"></i> view profile</a> <a
-							href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a> <a
-							href="#" title=""><i class="ti-target"></i>activity log</a> <a
-							href="#" title=""><i class="ti-settings"></i>account setting</a>
-						<a href="#" title=""><i class="ti-power-off"></i>log out</a>
-					</div>
-				</div>
-				<span class="ti-menu main-menu" data-ripple=""></span>
-			</div>
-		</div>
-		<!-- topbar -->
+                                        </div>
+                                    </li>
 
-		<section>
-			<div class="gap gray-bg">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="row" id="page-contents">
-								<div class="col-lg-3">
-									<aside class="sidebar static">
-										<div class="widget">
-											<h4 class="widget-title">Shortcuts</h4>
-											<ul class="naves">
-												<li><i class="ti-clipboard"></i> <a
-													href="newsfeed.html" title="">News feed</a></li>
-												<li><i class="ti-mouse-alt"></i> <a href="inbox.html"
-													title="">Inbox</a></li>
-												<li><i class="ti-files"></i> <a href="fav-page.html"
-													title="">My pages</a></li>
-												<li><i class="ti-user"></i> <a
-													href="<%= request.getContextPath() %>/include/timelineFriends.jsp"
-													title="">friends</a></li>
-												<li><i class="ti-image"></i> <a
-													href="timeline-photos.html" title="">images</a></li>
-												<li><i class="ti-video-camera"></i> <a
-													href="timeline-videos.html" title="">videos</a></li>
-												<li><i class="ti-comments-smiley"></i> <a
-													href="messages.html" title="">Messages</a></li>
-												<li><i class="ti-bell"></i> <a
-													href="notifications.html" title="">Notifications</a></li>
-												<li><i class="ti-share"></i> <a
-													href="people-nearby.html" title="">People Nearby</a></li>
-												<li><i class="fa fa-bar-chart-o"></i> <a
-													href="insights.html" title="">insights</a></li>
-												<li><i class="ti-power-off"></i> <a href="landing.html"
-													title="">Logout</a></li>
-											</ul>
-										</div>
-										<!-- Shortcuts -->
-										<div class="widget">
-											<h4 class="widget-title">Recent Activity</h4>
-											<ul class="activitiez">
-												<li>
-													<div class="activity-meta">
-														<i>10 hours Ago</i> <span><a href="#" title="">Commented
-																on Video posted </a></span>
-														<h6>
-															by <a href="time-line.html">black demon.</a>
-														</h6>
-													</div>
-												</li>
-												<li>
-													<div class="activity-meta">
-														<i>30 Days Ago</i> <span><a href="#" title="">Posted
-																your status. “Hello guys, how are you?”</a></span>
-													</div>
-												</li>
-												<li>
-													<div class="activity-meta">
-														<i>2 Years Ago</i> <span><a href="#" title="">Share
-																a video on her timeline.</a></span>
-														<h6>
-															"<a href="#">you are so funny mr.been.</a>"
-														</h6>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<!-- recent activites -->
-										<div class="widget stick-widget">
-											<h4 class="widget-title">Who's follownig</h4>
-											<ul class="followers">
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar2.jpg"
-															alt="">
-													</figure>
-													<div class="friend-meta">
-														<h4>
-															<a href="time-line.html" title="">Kelly Bill</a>
-														</h4>
-														<a href="#" title="" class="underline">Add Friend</a>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar4.jpg"
-															alt="">
-													</figure>
-													<div class="friend-meta">
-														<h4>
-															<a href="time-line.html" title="">Issabel</a>
-														</h4>
-														<a href="#" title="" class="underline">Add Friend</a>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar6.jpg"
-															alt="">
-													</figure>
-													<div class="friend-meta">
-														<h4>
-															<a href="time-line.html" title="">Andrew</a>
-														</h4>
-														<a href="#" title="" class="underline">Add Friend</a>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar8.jpg"
-															alt="">
-													</figure>
-													<div class="friend-meta">
-														<h4>
-															<a href="time-line.html" title="">Sophia</a>
-														</h4>
-														<a href="#" title="" class="underline">Add Friend</a>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar3.jpg"
-															alt="">
-													</figure>
-													<div class="friend-meta">
-														<h4>
-															<a href="time-line.html" title="">Allen</a>
-														</h4>
-														<a href="#" title="" class="underline">Add Friend</a>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<!-- who's following -->
-									</aside>
-								</div>
-								<!-- sidebar -->
-								<div class="col-lg-6">
-									<div class="central-meta">
-										<div class="new-postbox">
-											<figure>
-												<img
-													src="<%= request.getContextPath() %>/template/images/resources/admin2.jpg"
-													alt="">
-											</figure>
-											<div class="newpst-input">
-												<form method="post">
-													<textarea rows="2" placeholder="write something"></textarea>
-													<div class="attachments">
-														<ul>
-															<li><i class="fa fa-music"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-image"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-video-camera"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li><i class="fa fa-camera"></i> <label
-																class="fileContainer"> <input type="file">
-															</label></li>
-															<li>
-																<button type="submit">Post</button>
-															</li>
-														</ul>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<!-- add post new box -->
-									<div class="loadMore">
-										<div class="central-meta item">
-											<div class="user-post">
-												<div class="friend-info">
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar10.jpg"
-															alt="">
-													</figure>
-													<div class="friend-name">
-														<ins>
-															<a href="time-line.html" title="">Janice Griffith</a>
-														</ins>
-														<span>published: june,2 2018 19:PM</span>
-													</div>
-													<div class="post-meta">
-														<img src="images/resources/user-post.jpg" alt="">
-														<div class="we-video-info">
-															<ul>
-																<li><span class="views" data-toggle="tooltip"
-																	title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-																</span></li>
-																<li><span class="comment" data-toggle="tooltip"
-																	title="Comments"> <i class="fa fa-comments-o"></i>
-																		<ins>52</ins>
-																</span></li>
-																<li><span class="like" data-toggle="tooltip"
-																	title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-																</span></li>
-																<li><span class="dislike" data-toggle="tooltip"
-																	title="dislike"> <i class="ti-heart-broken"></i>
-																		<ins>200</ins>
-																</span></li>
-																<li class="social-media">
-																	<div class="menu">
-																		<div class="btn trigger">
-																			<i class="fa fa-share-alt"></i>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-html5"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i
-																					class="fa fa-google-plus"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-css3"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																			</div>
-																		</div>
+                                </ul>
+                                <div class="user-img">
+                                    <img src="https://picsum.photos/60/60" alt=""> <span class="status f-online"></span>
 
-																	</div>
-																</li>
-															</ul>
-														</div>
-														<div class="description">
+                                </div>
+                                <span class="ti-menu main-menu" data-ripple=""></span>
+                            </div>
+                        </div>
+                        <!-- topbar -->
 
-															<p>
-																World's most beautiful car in Curabitur <a href="#"
-																	title="">#test drive booking !</a> the most beatuiful
-																car available in america and the saudia arabia, you can
-																book your test drive by our official website
-															</p>
-														</div>
-													</div>
-												</div>
-												<div class="coment-area">
-													<ul class="we-comet">
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-1.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Jason borne</a>
-																	</h5>
-																	<span>1 year ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>we are working for the dance and sing songs. this
-																	car is very awesome for the youngster. please vote this
-																	car and like our post</p>
-															</div>
-															<ul>
-																<li>
-																	<div class="comet-avatar">
-																		<img
-																			src="<%= request.getContextPath() %>/template/images/resources/comet-2.jpg"
-																			alt="">
-																	</div>
-																	<div class="we-comment">
-																		<div class="coment-head">
-																			<h5>
-																				<a href="time-line.html" title="">alexendra
-																					dadrio</a>
-																			</h5>
-																			<span>1 month ago</span> <a class="we-reply" href="#"
-																				title="Reply"><i class="fa fa-reply"></i></a>
-																		</div>
-																		<p>
-																			yes, really very awesome car i see the features of
-																			this car in the official website of <a href="#"
-																				title="">#Mercedes-Benz</a> and really impressed :-)
-																		</p>
-																	</div>
-																</li>
-																<li>
-																	<div class="comet-avatar">
-																		<img
-																			src="<%= request.getContextPath() %>/template/images/resources/comet-3.jpg"
-																			alt="">
-																	</div>
-																	<div class="we-comment">
-																		<div class="coment-head">
-																			<h5>
-																				<a href="time-line.html" title="">Olivia</a>
-																			</h5>
-																			<span>16 days ago</span> <a class="we-reply" href="#"
-																				title="Reply"><i class="fa fa-reply"></i></a>
-																		</div>
-																		<p>i like lexus cars, lexus cars are most
-																			beautiful with the awesome features, but this car is
-																			really outstanding than lexus</p>
-																	</div>
-																</li>
-															</ul>
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-1.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Donald Trump</a>
-																	</h5>
-																	<span>1 week ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>
-																	we are working for the dance and sing songs. this video
-																	is very awesome for the youngster. please vote this
-																	video and like our channel <i class="em em-smiley"></i>
-																</p>
-															</div>
-														</li>
-														<li><a href="#" title="" class="showmore underline">more
-																comments</a></li>
-														<li class="post-comment">
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-1.jpg"
-																	alt="">
-															</div>
-															<div class="post-comt-box">
-																<form method="post">
-																	<textarea placeholder="Post your comment"></textarea>
-																	<div class="add-smiles">
-																		<span class="em em-expressionless" title="add icon"></span>
-																	</div>
-																	<div class="smiles-bunch">
-																		<i class="em em---1"></i> <i class="em em-smiley"></i>
-																		<i class="em em-anguished"></i> <i
-																			class="em em-laughing"></i> <i class="em em-angry"></i>
-																		<i class="em em-astonished"></i> <i
-																			class="em em-blush"></i> <i
-																			class="em em-disappointed"></i> <i
-																			class="em em-worried"></i> <i
-																			class="em em-kissing_heart"></i> <i
-																			class="em em-rage"></i> <i
-																			class="em em-stuck_out_tongue"></i>
-																	</div>
-																	<button type="submit"></button>
+                        <section>
+                            <div class="gap gray-bg">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="row" id="page-contents">
+                                                <div class="col-lg-3">
+                                                    <aside class="sidebar static">
+                                                        <div class="widget">
+                                                            <h4 class="widget-title">Shortcuts</h4>
+                                                            <ul class="naves">
+                                                                <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath()%>/include/newsfeed.jsp" title="">News feed</a></li>
+                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
+
+                                                                <li><i class="ti-bell"></i> <a href="notifications.html" title="">Notifications</a></li>
+                                                                <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- Shortcuts -->
+                                                        <div class="widget">
+                                                            <h4 class="widget-title">Derni&egrave;res activit&eacute;s</h4>
+                                                            <ul class="activitiez">
+
+
+                                                                <%
+                                                            	SQLConnector sql=new SQLConnector();
+                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	ArrayList<ActiviteBean> list= sql.getAllActiviteByUser(u.getId());
+                                                            	
+                                                            	int cptAct=0;
+                                                            	for(ActiviteBean a: list){
+                                                            		
+                                                            		if(cptAct<4){
+	                                                            		out.print(
+	                                                            		 "<li>"+
+	                                                                     "<div class='activity-meta'>"+
+	                                                                         "<i>"+a.getDate()+" : "+a.getDebut()+"</i> <span><a  title=''>"+a.getNom()+" a "+a.getVille()+" </a></span>"+
+	                                                                         "<h6>"+
+	                                                                             "termin&eacute; a "+a.getFin()+""+
+	                                                                         "</h6>"+
+	                                                                     "</div>"+
+	                                                                 "</li>");
+	                                                            	}
+                                                            		cptAct++;
+                                                            	}
+                                                            	
+                                                            	
+                                                            	
+                                                            	%>
+
+
+
+
+
+
+                                                            </ul>
+                                                        </div>
+                                                        <!-- recent activites -->
+                                                        <div class="widget stick-widget">
+                                                            <h4 class="widget-title">Amis covid&eacute;s</h4>
+                                                            <ul class="followers">
+
+
+                                                                <%
+                                                            int cpt1=0;
+                                                            ArrayList<Friend> listCovid = sql.getCovidedFriends(u.getId());
+                                                            for(Friend f: listCovid){
+                                                            	
+                                                            	out.print( "<li>"+
+                                                                 "<figure>"+
+                                                                     "<img src='https://picsum.photos/"+(cpt1+60) +"' alt=''>"+
+                                                                 "</figure>"+
+                                                                 "<div class='friend-meta'>"+
+                                                                     "<h4>"+
+                                                                         "<a  title=''>"+f.getNom()+" "+f.getPrenom()+"</a>"+
+                                                                     "</h4>"+
+                                                                     "<a  title='' class='underline'>"+f.getCovid()+" a "+f.getHeure()+"</a>"+
+                                                                 "</div>"+
+                                                            "</li>");
+                                                            	cpt1++;
+                                                            }
+                                                            
+                                                            
+                                                            
+                                                            %>
+
+
+
+
+                                                            </ul>
+                                                        </div>
+                                                        <!-- who's following -->
+                                                    </aside>
+                                                </div>
+                                                <!-- sidebar -->
+                                                <div class="col-lg-6">
+                                                    <div class="central-meta">
+
+                                                        <main>
+                                                        
+                                                        
+                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/JeSuisCovidServlet">
+										
+																<button type="submit" >JE SUIS POSITIF JE PREVIENS TOUT LE MONDE</button>
 																</form>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="central-meta item">
-											<div class="user-post">
-												<div class="friend-info">
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/nearly1.jpg"
-															alt="">
-													</figure>
-													<div class="friend-name">
-														<ins>
-															<a href="time-line.html" title="">Sara Grey</a>
-														</ins>
-														<span>published: june,2 2018 19:PM</span>
-													</div>
-													<div class="post-meta">
-														<iframe src="https://player.vimeo.com/video/15232052"
-															height="315" webkitallowfullscreen mozallowfullscreen
-															allowfullscreen></iframe>
 
-														<div class="we-video-info">
-															<ul>
-																<li><span class="views" data-toggle="tooltip"
-																	title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-																</span></li>
-																<li><span class="comment" data-toggle="tooltip"
-																	title="Comments"> <i class="fa fa-comments-o"></i>
-																		<ins>52</ins>
-																</span></li>
-																<li><span class="like" data-toggle="tooltip"
-																	title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-																</span></li>
-																<li><span class="dislike" data-toggle="tooltip"
-																	title="dislike"> <i class="ti-heart-broken"></i>
-																		<ins>200</ins>
-																</span></li>
-																<li class="social-media">
-																	<div class="menu">
-																		<div class="btn trigger">
-																			<i class="fa fa-share-alt"></i>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-html5"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i
-																					class="fa fa-google-plus"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-css3"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																			</div>
-																		</div>
 
-																	</div>
-																</li>
-															</ul>
-														</div>
-														<div class="description">
+                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/RechercherUserServlet">
+																<input type="text" name="recherche">
 
-															<p>
-																Lonely Cat Enjoying in Summer Curabitur <a href="#"
-																	title="">#mypage</a> ullamcorper ultricies nisi. Nam
-																eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
-																condimentum rhoncus, sem quam semper libero, sit amet
-																adipiscing sem neque sed ipsum. Nam quam nunc,
-															</p>
-														</div>
-													</div>
-												</div>
-												<div class="coment-area">
-													<ul class="we-comet">
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-1.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Jason borne</a>
-																	</h5>
-																	<span>1 year ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>we are working for the dance and sing songs. this
-																	video is very awesome for the youngster. please vote
-																	this video and like our channel</p>
-															</div>
-
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-2.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Sophia</a>
-																	</h5>
-																	<span>1 week ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>
-																	we are working for the dance and sing songs. this video
-																	is very awesome for the youngster. <i
-																		class="em em-smiley"></i>
-																</p>
-															</div>
-														</li>
-														<li><a href="#" title="" class="showmore underline">more
-																comments</a></li>
-														<li class="post-comment">
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-2.jpg"
-																	alt="">
-															</div>
-															<div class="post-comt-box">
-																<form method="post">
-																	<textarea placeholder="Post your comment"></textarea>
-																	<div class="add-smiles">
-																		<span class="em em-expressionless" title="add icon"></span>
-																	</div>
-																	<div class="smiles-bunch">
-																		<i class="em em---1"></i> <i class="em em-smiley"></i>
-																		<i class="em em-anguished"></i> <i
-																			class="em em-laughing"></i> <i class="em em-angry"></i>
-																		<i class="em em-astonished"></i> <i
-																			class="em em-blush"></i> <i
-																			class="em em-disappointed"></i> <i
-																			class="em em-worried"></i> <i
-																			class="em em-kissing_heart"></i> <i
-																			class="em em-rage"></i> <i
-																			class="em em-stuck_out_tongue"></i>
-																	</div>
-																	<button type="submit"></button>
+																<button type="submit" >Rechercher l'utilisateur</button>
 																</form>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="central-meta item">
-											<div class="user-post">
-												<div class="friend-info">
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/nearly6.jpg"
-															alt="">
-													</figure>
-													<div class="friend-name">
-														<ins>
-															<a href="time-line.html" title="">Sophia</a>
-														</ins>
-														<span>published: january,5 2018 19:PM</span>
-													</div>
-													<div class="post-meta">
-														<div class="post-map">
-															<div class="nearby-map">
-																<div id="map-canvas"></div>
-															</div>
-														</div>
-														<!-- near by map -->
-														<div class="we-video-info">
-															<ul>
-																<li><span class="views" data-toggle="tooltip"
-																	title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-																</span></li>
-																<li><span class="comment" data-toggle="tooltip"
-																	title="Comments"> <i class="fa fa-comments-o"></i>
-																		<ins>52</ins>
-																</span></li>
-																<li><span class="like" data-toggle="tooltip"
-																	title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-																</span></li>
-																<li><span class="dislike" data-toggle="tooltip"
-																	title="dislike"> <i class="ti-heart-broken"></i>
-																		<ins>200</ins>
-																</span></li>
-																<li class="social-media">
-																	<div class="menu">
-																		<div class="btn trigger">
-																			<i class="fa fa-share-alt"></i>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-html5"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i
-																					class="fa fa-google-plus"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-css3"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																			</div>
-																		</div>
+																	
 
-																	</div>
-																</li>
-															</ul>
-														</div>
-														<div class="description">
 
-															<p>
-																Curabitur Lonely Cat Enjoying in Summer <a href="#"
-																	title="">#mypage</a> ullamcorper ultricies nisi. Nam
-																eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
-																condimentum rhoncus, sem quam semper libero, sit amet
-																adipiscing sem neque sed ipsum. Nam quam nunc,
-															</p>
-														</div>
-													</div>
-												</div>
-												<div class="coment-area">
-													<ul class="we-comet">
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-1.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Jason borne</a>
-																	</h5>
-																	<span>1 year ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>we are working for the dance and sing songs. this
-																	video is very awesome for the youngster. please vote
-																	this video and like our channel</p>
-															</div>
 
-														</li>
-														<li>
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-2.jpg"
-																	alt="">
-															</div>
-															<div class="we-comment">
-																<div class="coment-head">
-																	<h5>
-																		<a href="time-line.html" title="">Sophia</a>
-																	</h5>
-																	<span>1 week ago</span> <a class="we-reply" href="#"
-																		title="Reply"><i class="fa fa-reply"></i></a>
-																</div>
-																<p>
-																	we are working for the dance and sing songs. this video
-																	is very awesome for the youngster. <i
-																		class="em em-smiley"></i>
-																</p>
-															</div>
-														</li>
-														<li><a href="#" title="" class="showmore underline">more
-																comments</a></li>
-														<li class="post-comment">
-															<div class="comet-avatar">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/comet-2.jpg"
-																	alt="">
-															</div>
-															<div class="post-comt-box">
-																<form method="post">
-																	<textarea placeholder="Post your comment"></textarea>
-																	<div class="add-smiles">
-																		<span class="em em-expressionless" title="add icon"></span>
-																	</div>
-																	<div class="smiles-bunch">
-																		<i class="em em---1"></i> <i class="em em-smiley"></i>
-																		<i class="em em-anguished"></i> <i
-																			class="em em-laughing"></i> <i class="em em-angry"></i>
-																		<i class="em em-astonished"></i> <i
-																			class="em em-blush"></i> <i
-																			class="em em-disappointed"></i> <i
-																			class="em em-worried"></i> <i
-																			class="em em-kissing_heart"></i> <i
-																			class="em em-rage"></i> <i
-																			class="em em-stuck_out_tongue"></i>
-																	</div>
-																	<button type="submit"></button>
-																</form>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div class="central-meta item">
-											<div class="user-post">
-												<div class="friend-info">
-													<figure>
-														<img alt=""
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar10.jpg">
-													</figure>
-													<div class="friend-name">
-														<ins>
-															<a title="" href="time-line.html">Janice Griffith</a>
-														</ins>
-														<span>published: june,2 2018 19:PM</span>
-													</div>
-													<div class="description">
 
-														<p>
-															Curabitur World's most beautiful car in <a title=""
-																href="#">#test drive booking !</a> the most beatuiful
-															car available in america and the saudia arabia, you can
-															book your test drive by our official website
-														</p>
-													</div>
-													<div class="post-meta">
-														<div class="linked-image align-left">
-															<a title="" href="#"><img alt=""
-																src="<%= request.getContextPath() %>/template/images/resources/page1.jpg"></a>
-														</div>
-														<div class="detail">
-															<span>Love Maid - ChillGroves</span>
-															<p>Lorem ipsum dolor sit amet, consectetur ipisicing
-																elit, sed do eiusmod tempor incididunt ut labore et
-																dolore magna aliqua...</p>
-															<a title="" href="#">www.sample.com</a>
-														</div>
-														<div class="we-video-info">
-															<ul>
-																<li><span class="views" data-toggle="tooltip"
-																	title="views"> <i class="fa fa-eye"></i> <ins>1.2k</ins>
-																</span></li>
-																<li><span class="comment" data-toggle="tooltip"
-																	title="Comments"> <i class="fa fa-comments-o"></i>
-																		<ins>52</ins>
-																</span></li>
-																<li><span class="like" data-toggle="tooltip"
-																	title="like"> <i class="ti-heart"></i> <ins>2.2k</ins>
-																</span></li>
-																<li><span class="dislike" data-toggle="tooltip"
-																	title="dislike"> <i class="ti-heart-broken"></i>
-																		<ins>200</ins>
-																</span></li>
-																<li class="social-media">
-																	<div class="menu">
-																		<div class="btn trigger">
-																			<i class="fa fa-share-alt"></i>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-html5"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-facebook"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i
-																					class="fa fa-google-plus"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-twitter"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-css3"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-instagram"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-dribbble"></i></a>
-																			</div>
-																		</div>
-																		<div class="rotater">
-																			<div class="btn btn-icon">
-																				<a href="#" title=""><i class="fa fa-pinterest"></i></a>
-																			</div>
-																		</div>
 
-																	</div>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- centerl meta -->
-								<div class="col-lg-3">
-									<aside class="sidebar static">
-										<div class="widget">
-											<h4 class="widget-title">Your page</h4>
-											<div class="your-page">
-												<figure>
-													<a href="#" title=""><img
-														src="<%= request.getContextPath() %>/template/images/resources/friend-avatar9.jpg"
-														alt=""></a>
-												</figure>
-												<div class="page-meta">
-													<a href="#" title="" class="underline">My page</a> <span><i
-														class="ti-comment"></i><a href="insight.html" title="">Messages
-															<em>9</em>
-													</a></span> <span><i class="ti-bell"></i><a href="insight.html"
-														title="">Notifications <em>2</em></a></span>
-												</div>
-												<div class="page-likes">
-													<ul class="nav nav-tabs likes-btn">
-														<li class="nav-item"><a class="active" href="#link1"
-															data-toggle="tab">likes</a></li>
-														<li class="nav-item"><a class="" href="#link2"
-															data-toggle="tab">views</a></li>
-													</ul>
-													<!-- Tab panes -->
-													<div class="tab-content">
-														<div class="tab-pane active fade show " id="link1">
-															<span><i class="ti-heart"></i>884</span> <a href="#"
-																title="weekly-likes">35 new likes this week</a>
-															<div class="users-thumb-list">
-																<a href="#" title="Anderw" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-1.jpg"
-																	alt="">
-																</a> <a href="#" title="frank" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-2.jpg"
-																	alt="">
-																</a> <a href="#" title="Sara" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-3.jpg"
-																	alt="">
-																</a> <a href="#" title="Amy" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-4.jpg"
-																	alt="">
-																</a> <a href="#" title="Ema" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-5.jpg"
-																	alt="">
-																</a> <a href="#" title="Sophie" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-6.jpg"
-																	alt="">
-																</a> <a href="#" title="Maria" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-7.jpg"
-																	alt="">
-																</a>
-															</div>
-														</div>
-														<div class="tab-pane fade" id="link2">
-															<span><i class="ti-eye"></i>440</span> <a href="#"
-																title="weekly-likes">440 new views this week</a>
-															<div class="users-thumb-list">
-																<a href="#" title="Anderw" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-1.jpg"
-																	alt="">
-																</a> <a href="#" title="frank" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-2.jpg"
-																	alt="">
-																</a> <a href="#" title="Sara" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-3.jpg"
-																	alt="">
-																</a> <a href="#" title="Amy" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-4.jpg"
-																	alt="">
-																</a> <a href="#" title="Ema" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-5.jpg"
-																	alt="">
-																</a> <a href="#" title="Sophie" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-6.jpg"
-																	alt="">
-																</a> <a href="#" title="Maria" data-toggle="tooltip"> <img
-																	src="<%= request.getContextPath() %>/template/images/resources/userlist-7.jpg"
-																	alt="">
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- page like widget -->
-										<div class="widget">
-											<div class="banner medium-opacity bluesh">
-												<div class="bg-image"
-													style="background-image: url(<%= request.getContextPath() %>/template/images/resources/baner-widgetbg.jpg)"></div>
-												<div class="baner-top">
-													<span><img alt=""
-														src="<%= request.getContextPath() %>/template/images/book-icon.png"></span>
-													<i class="fa fa-ellipsis-h"></i>
-												</div>
-												<div class="banermeta">
-													<p>create your own favourit page.</p>
-													<span>like them all</span> <a data-ripple="" title=""
-														href="#">start now!</a>
-												</div>
-											</div>
-										</div>
-										<div class="widget friend-list stick-widget">
-											<h4 class="widget-title">Friends</h4>
-											<div id="searchDir"></div>
-											<ul id="people-list" class="friendz-list">
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar.jpg"
-															alt="">
-														<span class="status f-online"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">bucky barnes</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="f2859b9c869780819d9e969780b2959f939b9edc919d9f">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar2.jpg"
-															alt="">
-														<span class="status f-away"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">Sarah Loren</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="ea888b98848f99aa8d878b8386c4898587">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar3.jpg"
-															alt="">
-														<span class="status f-off"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">jason borne</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="2d474c5e42434f6d4a404c4441034e4240">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar4.jpg"
-															alt="">
-														<span class="status f-off"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">Cameron diaz</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="6802091b07060a280f05090104460b0705">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
+                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/AjouterActiviteServlet">
 
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar5.jpg"
-															alt="">
-														<span class="status f-online"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">daniel warber</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="4e242f3d21202c0e29232f2722602d2123">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
+                                                                <label id="lieuChoix">Lieu choisi </label>
 
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar6.jpg"
-															alt="">
-														<span class="status f-away"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">andrew</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="1872796b77767a587f75797174367b7775">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
+                                                                <input type="hidden" name="hiddenLieuChoix" id="hiddenLieuChoix"><br>
 
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar7.jpg"
-															alt="">
-														<span class="status f-off"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">amy watson</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="711b10021e1f1331161c10181d5f121e1c">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
 
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar5.jpg"
-															alt="">
-														<span class="status f-online"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">daniel warber</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="234942504c4d4163444e424a4f0d404c4e">[email&#160;protected]</a></i>
-													</div>
-												</li>
-												<li>
+                                                                <label id="adresseChoix">Adresse </label>
+                                                                <input type="hidden" name="hiddenAdresseChoix" id="hiddenAdresseChoix"><br>
 
-													<figure>
-														<img
-															src="<%= request.getContextPath() %>/template/images/resources/friend-avatar2.jpg"
-															alt="">
-														<span class="status f-away"></span>
-													</figure>
-													<div class="friendz-meta">
-														<a href="time-line.html">Sarah Loren</a> <i><a
-															href="https://wpkixx.com/cdn-cgi/l/email-protection"
-															class="__cf_email__"
-															data-cfemail="d5b7b4a7bbb0a695b2b8b4bcb9fbb6bab8">[email&#160;protected]</a></i>
-													</div>
-												</li>
-											</ul>
-											<div class="chat-box">
-												<div class="chat-head">
-													<span class="status f-online"></span>
-													<h6>Bucky Barnes</h6>
-													<div class="more">
-														<span><i class="ti-more-alt"></i></span> <span
-															class="close-mesage"><i class="ti-close"></i></span>
-													</div>
-												</div>
-												<div class="chat-list">
-													<ul>
-														<li class="me">
-															<div class="chat-thumb">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/chatlist1.jpg"
-																	alt="">
-															</div>
-															<div class="notification-event">
-																<span class="chat-message-item"> Hi James! Please
-																	remember to buy the food for tomorrow! I’m gonna be
-																	handling the gifts and Jake’s gonna get the drinks </span> <span
-																	class="notification-date"><time
-																		datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																		at 8:10pm</time></span>
-															</div>
-														</li>
-														<li class="you">
-															<div class="chat-thumb">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/chatlist2.jpg"
-																	alt="">
-															</div>
-															<div class="notification-event">
-																<span class="chat-message-item"> Hi James! Please
-																	remember to buy the food for tomorrow! I’m gonna be
-																	handling the gifts and Jake’s gonna get the drinks </span> <span
-																	class="notification-date"><time
-																		datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																		at 8:10pm</time></span>
-															</div>
-														</li>
-														<li class="me">
-															<div class="chat-thumb">
-																<img
-																	src="<%= request.getContextPath() %>/template/images/resources/chatlist1.jpg"
-																	alt="">
-															</div>
-															<div class="notification-event">
-																<span class="chat-message-item"> Hi James! Please
-																	remember to buy the food for tomorrow! I’m gonna be
-																	handling the gifts and Jake’s gonna get the drinks </span> <span
-																	class="notification-date"><time
-																		datetime="2004-07-24T18:18" class="entry-date updated">Yesterday
-																		at 8:10pm</time></span>
-															</div>
-														</li>
-													</ul>
-													<form class="text-box">
-														<textarea placeholder="Post enter to post..."></textarea>
-														<div class="add-smiles">
-															<span title="add icon" class="em em-expressionless"></span>
-														</div>
-														<div class="smiles-bunch">
-															<i class="em em---1"></i> <i class="em em-smiley"></i> <i
-																class="em em-anguished"></i> <i class="em em-laughing"></i>
-															<i class="em em-angry"></i> <i class="em em-astonished"></i>
-															<i class="em em-blush"></i> <i class="em em-disappointed"></i>
-															<i class="em em-worried"></i> <i
-																class="em em-kissing_heart"></i> <i class="em em-rage"></i>
-															<i class="em em-stuck_out_tongue"></i>
-														</div>
-														<button type="submit"></button>
-													</form>
-												</div>
-											</div>
-										</div>
-										<!-- friends list sidebar -->
-									</aside>
-								</div>
-								<!-- sidebar -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                                                                <label id="villeChoix">Ville </label>
+                                                                <input type="hidden" name="hiddenVilleChoix" id="hiddenVilleChoix"><br>
 
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-4">
-						<div class="widget">
-							<div class="foot-logo">
-								<div class="logo">
-									<a href="index-2.html" title=""><img
-										src="<%= request.getContextPath() %>/template/images/logo.png"
-										alt=""></a>
-								</div>
-								<p>The trio took this simple idea and built it into the
-									world’s leading carpooling platform.</p>
-							</div>
-							<ul class="location">
-								<li><i class="ti-map-alt"></i>
-									<p>33 new montgomery st.750 san francisco, CA USA 94105.</p></li>
-								<li><i class="ti-mobile"></i>
-									<p>+1-56-346 345</p></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-4">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>follow</h4>
-							</div>
-							<ul class="list-style">
-								<li><i class="fa fa-facebook-square"></i> <a
-									href="https://web.facebook.com/shopcircut/" title="">facebook</a></li>
-								<li><i class="fa fa-twitter-square"></i><a
-									href="https://twitter.com/login?lang=en" title="">twitter</a></li>
-								<li><i class="fa fa-instagram"></i><a
-									href="https://www.instagram.com/?hl=en" title="">instagram</a></li>
-								<li><i class="fa fa-google-plus-square"></i> <a
-									href="https://plus.google.com/discover" title="">Google+</a></li>
-								<li><i class="fa fa-pinterest-square"></i> <a
-									href="https://www.pinterest.com/" title="">Pintrest</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-4">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>Navigate</h4>
-							</div>
-							<ul class="list-style">
-								<li><a href="about.html" title="">about us</a></li>
-								<li><a href="contact.html" title="">contact us</a></li>
-								<li><a href="terms.html" title="">terms & Conditions</a></li>
-								<li><a href="#" title="">RSS syndication</a></li>
-								<li><a href="sitemap.html" title="">Sitemap</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-4">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>useful links</h4>
-							</div>
-							<ul class="list-style">
-								<li><a href="#" title="">leasing</a></li>
-								<li><a href="#" title="">submit route</a></li>
-								<li><a href="#" title="">how does it work?</a></li>
-								<li><a href="#" title="">agent listings</a></li>
-								<li><a href="#" title="">view All</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-4">
-						<div class="widget">
-							<div class="widget-title">
-								<h4>download apps</h4>
-							</div>
-							<ul class="colla-apps">
-								<li><a href="https://play.google.com/store?hl=en" title=""><i
-										class="fa fa-android"></i>android</a></li>
-								<li><a href="https://www.apple.com/lae/ios/app-store/"
-									title=""><i class="ti-apple"></i>iPhone</a></li>
-								<li><a href="https://www.microsoft.com/store/apps" title=""><i
-										class="fa fa-windows"></i>Windows</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- footer -->
-		<div class="bottombar">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<span class="copyright"><a target="_blank"
+
+
+                                                                <input type="date" id="dateActivite" name="dateStart" value="2022-01-01" min="2022-01-01" max="2030-01-01" required><br>
+
+
+                                                                <input type="time" id="hDebut" name="hDebut" min="00:00" max="23:59" required>
+
+                                                                <small>Heure de d&eacute;but de l'activit&eacute;</small><br>
+
+                                                                <input type="time" id="hFin" name="hFin" min="00:00" max="23:59" required>
+
+                                                                <small>Heure de fin de l'activit&eacute;</small><br>
+
+                                                                <button type="submit">Valider l'activit&eacute;</button>
+
+                                                            </form>
+
+
+
+
+
+
+
+
+                                                            <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for LIEU.." />
+
+
+                                                            <table id="myTable2" style="border-style: dashed solid;">
+                                                                <tr class="header">
+                                                                    <th style="width: 30%;">Lieu</th>
+                                                                    <th style="width: 30%;">Adresse</th>
+                                                                    <th style="width: 20%;">Ville</th>
+                                                                    <th style="width: 10%;">Latitude</th>
+                                                                    <th style="width: 10%;">Longitude</th>
+
+                                                                </tr>
+
+
+
+                                                                <% 
+                                                      //On affiche toute les villes (max 15) mais elles sont toutes ici bien que caché
+                                                      
+                                                      SQLConnector sql1=new SQLConnector();
+                                                      ArrayList<VilleBean> listLieu= sql1.getAllLieu();
+                                                      
+                                                        cpt1=0;
+                                                      
+                                                      for(VilleBean v: listLieu){
+                                                          if(cpt1>10){
+                                                              out.print("<tr style='display:none' style='border-style: dashed solid;' onclick='trOnClick2("+v.getLatitude()+","+v.getLongitude()+",\""+v.getNom().replace("'","&#39;")+"\",\""+v.getAdresse().replace("'","&#39;")+"\" ,\""+v.getVille().replace("'","&#39;")+"\")'>"+
+                                                                        "<td>"+v.getAdresse()+"</td>"+
+                                                                        "<td>"+v.getVille()+"</td>"+
+                                                                        "<td>"+v.getLatitude()+"</td>"+
+                                                                        "<td>"+v.getLongitude()+"</td>"+
+                                                    
+                                                                      "</tr>"
+                                                                      
+                                                                      );
+                                                          }
+                                                          else{
+                                                              out.print("<tr style='border-style: dashed solid;' onclick='trOnClick2("+v.getLatitude()+","+v.getLongitude()+",\""+v.getNom().replace("'","&#39;")+"\",\""+v.getAdresse().replace("'","&#39;")+"\" ,\""+v.getVille().replace("'","&#39;")+"\")'>"+
+                                                                        "<td>"+v.getNom()+"</td>"+
+                                                                        "<td>"+v.getAdresse()+"</td>"+
+                                                                        "<td>"+v.getVille()+"</td>"+
+                                                                        "<td>"+v.getLatitude()+"</td>"+
+                                                                        "<td>"+v.getLongitude()+"</td>"+
+                                                                      "</tr>"
+                                                                      
+                                                                      );
+                                                          }
+                                                          
+                                                          
+                                                          
+                                                          cpt1++;
+                                                      }
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      %>
+
+
+
+
+                                                            </table>
+
+
+
+
+
+                                                            <div id="maCarte" class="card" style="width: 37rem; border-style: dashed solid;"></div>
+
+
+
+                                                            <form style='border-style: dashed solid;'>
+                                                                <div class="form-group">
+                                                                    <input type="text" id="adresse" placeholder="Adresse Ici " style="border:1px solid #000000; width:250px;">Adresse</input>
+
+                                                                </div>
+
+
+                                                                <button type="button" onClick="afficherAdresse()" class="btn btn-primary">Chercher des adresses</button>
+                                                            </form>
+
+
+                                                            <aside>
+                                                                <div class="sidebar" border-style: dashed solid; id="showResultAdress"></div>
+
+                                                            </aside>
+
+
+                                                        </main>
+                                                    </div>
+                                                    <!-- add post new box -->
+                                                    <div class="loadMore">
+                                                        <div class="central-meta item">
+
+
+
+                                                            <%
+                                                        ArrayList<ActiviteBean> listActFriends=sql.getFriendsActivity(u.getId());
+                                                        int cpt=0;
+                                                        for(ActiviteBean act : listActFriends){
+                                                        	UserBean uF  = sql.getFriend(act.getUserId());
+                                                        	out.print(
+                                                        	"<div class='user-post'>"+
+                                                            "<div class='friend-info'>"+
+                                                                "<figure>"+
+                                                                    "<img src='https://picsum.photos/"+(cpt+60)+" alt=''>"+
+                                                                "</figure>"+
+                                                                "<div class='friend-name'>"+
+                                                                    "<ins>"+
+																"<a  title=''>"+uF.getNom()+" "+uF.getPrenom()+"</a>"+
+																"</ins>"+
+                                                                    "<span>Le "+act.getDate()+" de "+act.getDebut()+" a "+act.getFin()+"</span>"+
+	                                                                "</div>"+
+	                                                                "<div class='post-meta'>"+
+	                                                                   "<img src='images/resources/user-post.jpg' alt=''>"+
+	                                                                    "<div class='description'>"+
+	                                                                        "<p>"+
+																				"Votre ami &eacute;tait a "+act.getNom()+" a "+act.getAdresse()+" dans la ville "+act.getVille()+" "+
+	                                                                        "</p>"+
+	                                                                    "</div>"+
+	                                                                "</div>"+
+	                                                            "</div>"+
+	                                                        "</div>");
+                                                        	cpt++;
+                                                        	
+                                                        	
+                                                        }
+                                                        
+                                                        
+                                                        %>
+
+
+
+
+
+
+
+
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                                <!-- centerl meta -->
+                                                <div class="col-lg-3">
+                                                    <aside class="sidebar static">
+                                                        <div class="widget">
+                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/AjouterLieu">
+
+                                                                <label> <% 
+                                                                if(session.getAttribute("lieuOk")!=null){
+                                                                    if (!(boolean)(session.getAttribute("lieuOk"))){
+                                                                        session.setAttribute("lieuOk",null);
+                                                                        out.print("Le lieu existe d&eacute;jà. <br>");
+                                                                    }else{
+                                                                        out.print("Le lieu a bien &eacute;t&eacute; ajout&eacute;. <br>");
+                                                                        session.setAttribute("lieuOk",null);
+                                                        
+                                                                    }
+                                                                }
+                                                                    %>
+                                                                </label>
+
+                                                                <input type="text" id="nomInput" name="nomInput" required>Nom du lieu</input><br>
+                                                                <label id='adresseLabel'>Adresse du lieu</label><br> <label id='latitudeLabel'>Latitude du lieu</label><br> <label id='longitudeLabel'>Longitude du lieu</label><br> <label id='villeLabel'>Ville du lieu</label><br>                                                                <input name="hiddenLat" type="hidden" id="hiddenLat" value=""></input> <input name="hiddenLng" type="hidden" id="hiddenLng" value=""></input> <input name="hiddenAdr" type="hidden" id="hiddenAdr"
+                                                                    value=""></input> <input name="hiddenNom" type="hidden" id="hiddenNom" value=""></input> <input type="hidden" name="hiddenVille" id="hiddenVille" value=""></input>
+
+
+
+                                                                <button type="submit">Ajouter ce lieu</button>
+                                                            </form>
+                                                        </div>
+
+
+                                                        <div class="widget" style="width:80%;height:60%; overflow:scroll;">
+                                                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." style="width:150px;" />
+
+                                                            <table id="myTable" style="border-style: dashed solid;">
+                                                                <tr class="header">
+                                                                    <th style="width: 60%;">City</th>
+                                                                </tr>
+
+
+
+                                                                <% 
+                                                      //On affiche toute les villes (max 15) mais elles sont toutes ici bien que caché
+                                                      sql=new SQLConnector();
+                                                      
+                                                      ArrayList<VilleBean> list1= sql.getAllVille();
+                                                      
+                                                      int cpt2=0;
+                                                      
+                                                      for(VilleBean v: list1){
+                                                          if(cpt2>10){
+                                                              out.print("<tr style='display:none' style='border-style: dashed solid;' onclick='trOnClick("+v.getLatitude()+","+v.getLongitude()+", \""+v.getNom()+"\")'>"+
+                                                                        "<td>"+v.getNom()+"</td>"+
+                                                                      "</tr>"
+                                                                      
+                                                                      );
+                                                          }
+                                                          else{
+                                                              out.print("<tr style='border-style: dashed solid;' onclick='trOnClick("+v.getLatitude()+","+v.getLongitude()+",\""+v.getNom()+"\")'>"+
+                                                                        "<td>"+v.getNom()+"</td>"+
+                                                                      "</tr>"           );
+                                                          }
+                                                          cpt2++;}
+                                                      %>
+
+                                                            </table>
+                                                        </div>
+                                                        <!-- page like widget -->
+
+                                                        <div class="widget friend-list stick-widget">
+                                                            <h4 class="widget-title">Friends</h4>
+                                                            <div id="searchDir"></div>
+                                                            <ul id="people-list" class="friendz-list">
+
+                                                                <%
+										
+												 u = (UserBean) session.getAttribute("current_user");
+										 ArrayList<Friend> listF= sql.getFriends(u.getId());
+										int cpt3=0;
+										for(Friend f : listF){
+											
+
+											
+											
+											out.print(
+													"<li>"+
+											"<figure>"+
+											"<img src='https://picsum.photos/"+(cpt3+45)+"' alt=''>"+
+											"<span class='status f-online'></span>"+
+										"</figure>"+
+										"<div class='friendz-meta'>"+
+											"<a >"+f.getPrenom()+" "+f.getNom()+"</a>"+
+											"<i>@"+f.getUsername()+"</i>"+
+										"</div>"+
+									"</li>"
+											);
+											cpt3++;
+										}
+										
+										
+										
+										%>
+
+
+
+
+
+                                                            </ul>
+                                                            
+                                                        </div>
+                                                        <!-- friends list sidebar -->
+                                                    </aside>
+                                                </div>
+                                                <!-- sidebar -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <!-- footer -->
+                        <div class="bottombar">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="copyright"><a target="_blank"
 							href="https://www.templateshub.net">Templates Hub</a></span> <i><img
-							src="<%= request.getContextPath() %>/template/images/credit-cards.png"
 							alt=""></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="side-panel">
-		<h4 class="panel-title">General Setting</h4>
-		<form method="post">
-			<div class="setting-row">
-				<span>use night mode</span> <input type="checkbox" id="nightmode1" />
-				<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Notifications</span> <input type="checkbox" id="switch22" />
-				<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Notification sound</span> <input type="checkbox" id="switch33" />
-				<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>My profile</span> <input type="checkbox" id="switch44" /> <label
-					for="switch44" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Show profile</span> <input type="checkbox" id="switch55" /> <label
-					for="switch55" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-		</form>
-		<h4 class="panel-title">Account Setting</h4>
-		<form method="post">
-			<div class="setting-row">
-				<span>Sub users</span> <input type="checkbox" id="switch66" /> <label
-					for="switch66" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>personal account</span> <input type="checkbox" id="switch77" />
-				<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Business account</span> <input type="checkbox" id="switch88" />
-				<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Show me online</span> <input type="checkbox" id="switch99" />
-				<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Delete history</span> <input type="checkbox" id="switch101" />
-				<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Expose author name</span> <input type="checkbox"
-					id="switch111" /> <label for="switch111" data-on-label="ON"
-					data-off-label="OFF"></label>
-			</div>
-		</form>
-	</div>
-	<!-- side panel -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-	<% // <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="< = request.getContextPath() > /template/js/main.min.js"></script> %>
-	<script src="<%= request.getContextPath() %>/template/js/script.js"></script>
-	<script src="<%= request.getContextPath() %>/template/js/map-init.js"></script>
-	<script src="<%= request.getContextPath() %> /template/js/main.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
+                    <!-- side panel -->
 
-</body>
+                    <% // <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="< = request.getContextPath() > /template/js/main.min.js"></script> %>
+                        <script src="<%= request.getContextPath() %>/template/js/script.js"></script>
+                        <script src="<%= request.getContextPath() %>/template/js/map-init.js"></script>
+                        <script src="<%= request.getContextPath() %> /template/js/main.min.js"></script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 
-</html>
+
+
+                        <!-- Fichiers Javascript -->
+                        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+                        <script>
+                            // On initialise la carte
+                            var carte = L.map('maCarte').setView([48.692054, 6.184417], 13);
+
+                            // On charge les "tuiles"
+                            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                                // Il est toujours bien de laisser le lien vers la source des données
+                                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                                minZoom: 1,
+                                maxZoom: 20
+                            }).addTo(carte);
+
+                            //    let xmlhttp = new XMLHttpRequest();
+
+                            //   xmlhttp.onreadystatechange = () => {
+                            // La transaction est terminée ?
+                            // if(xmlhttp.readyState == 4){
+                            // Si la transaction est un succès
+                            // if(xmlhttp.status == 200){
+                            // On traite les données reçues
+                            //  let donnees = JSON.parse(xmlhttp.responseText)
+
+                            // On boucle sur les données (ES8)
+                            //  Object.entries(donnees.agences).forEach(agence => {
+                            // Ici j'ai une seule agence
+                            // On crée un marqueur pour l'agence
+                            //        let marker = L.marker([agence[1].lat, agence[1].lon]).addTo(carte)
+                            //      marker.bindPopup(agence[1].nom)
+                            // })
+                            //  }//else{
+                            // console.log(xmlhttp.statusText);
+                            //}
+                            //  }
+                            //  }
+
+                            //   xmlhttp.open("GET", "http://agence.test/liste_simple.php");
+
+                            // xmlhttp.send(null);
+
+                            <%
+       
+       listLieu=sql.getAllLieu();
+       for(VilleBean v : listLieu){
+           
+           
+           
+           out.print(" marker = L.marker(["+v.getLatitude()+", "+v.getLongitude()+"]).addTo(carte).on('click',onClickMarker);"+
+        "marker.bindPopup(\""+v.getNom()+":"+v.getVille()+":"+v.getAdresse()+"\");");
+          
+    
+       }
+       
+       
+       %>
+
+                            function onClickMarker(e) {
+
+
+                                //TODO Remplir le formulaire pour ajouter une activité pss un lieu
+                                var pop = e.target.getPopup();
+
+
+
+
+                                var labelLieuChoix = document.getElementById("lieuChoix");
+                                var hiddenLieuChoix = document.getElementById("hiddenLieuChoix");
+
+                                var labelAdresseChoix = document.getElementById("adresseChoix");
+                                var hiddenAdresseChoix = document.getElementById("hiddenAdresseChoix");
+
+                                var labelVilleChoix = document.getElementById("villeChoix");
+                                var hiddenVilleChoix = document.getElementById("hiddenVilleChoix");
+
+
+                                labelVilleChoix.textContent = pop.getContent().split(":")[1];
+                                hiddenVilleChoix.value = pop.getContent().split(":")[1];
+
+                                labelAdresseChoix.textContent = pop.getContent().split(":")[2];
+                                hiddenAdresseChoix.value = pop.getContent().split(":")[2];
+
+                                hiddenLieuChoix.value = pop.getContent().split(":")[0];
+                                labelLieuChoix.textContent = pop.getContent().split(":")[0];
+
+
+                            }
+
+
+
+
+
+
+
+
+
+                            var popup = L.popup();
+
+                            function onMapClick(e) {
+
+
+
+                                popup
+                                    .setLatLng(e.latlng)
+                                    .setContent("Vous avez cliqué ici ! Les informations ont été automatiquement remplis dans le formulaire pour ajouter le lieu.")
+                                    .openOn(carte);
+
+
+                                // the location we want to GeoCode
+
+                                // we are using MapQuest's Nominatim service
+                                var geocode = 'http://www.mapquestapi.com/geocoding/v1/reverse?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location=' + e.latlng.lat + ',' + e.latlng.lng + '&includeRoadMetadata=true&includeNearestIntersection=true';
+                                // https://www.mapquestapi.com/geocoding/v1/address?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location=boulangerie%20nancy
+
+
+                                var villeLabel = document.getElementById("villeLabel");
+                                var latLabel = document.getElementById("latitudeLabel");
+                                var lngLabel = document.getElementById("longitudeLabel");
+                                var adresseLabel = document.getElementById("adresseLabel");
+
+
+                                var hiddenLat = document.getElementById("hiddenLat");
+                                var hiddenLng = document.getElementById("hiddenLng");
+                                var hiddenAdr = document.getElementById("hiddenAdr");
+                                var hiddenVille = document.getElementById("hiddenVille");
+
+                                var nom = document.getElementById("nomInput");
+                                var hiddenNom = document.getElementById("hiddenNom");
+
+                                // use jQuery to call the API and get the JSON results
+                                $.getJSON(geocode, function(data) {
+                                    console.log(data['results'][0]['locations']);
+
+                                    villeLabel.textContent = data['results'][0]['locations'][0]['adminArea5'];
+                                    hiddenVille.value = data['results'][0]['locations'][0]['adminArea5'];
+
+                                    lngLabel.textContent = e.latlng.lng;
+                                    hiddenLng.value = e.latlng.lng;
+
+                                    latLabel.textContent = e.latlng.lat;
+                                    hiddenLat.value = e.latlng.lat;
+
+                                    adresseLabel.textContent = data['results'][0]['locations'][0]['street'];
+                                    hiddenAdr.value = data['results'][0]['locations'][0]['street'];
+
+                                    hiddenNom.value = nom.value;
+                                    //console.log(data);
+                                });
+
+
+                            }
+
+                            carte.on('click', onMapClick);
+
+
+
+
+                            function trOnClick(lat, lng, ville) {
+
+                                console.log(lng + "," + lat)
+
+                                popup
+                                    .setLatLng(L.latLng(lat, lng))
+                                    .setContent("You are in : " + ville)
+                                    .openOn(carte);
+
+                                carte.flyTo([lat, lng], 15);
+
+
+
+                            }
+
+                            function trOnClick2(lat, lng, nom, adr, ville) {
+
+
+
+
+                                var labelLieuChoix = document.getElementById("lieuChoix");
+                                var hiddenLieuChoix = document.getElementById("hiddenLieuChoix");
+
+                                var labelAdresseChoix = document.getElementById("adresseChoix");
+                                var hiddenAdresseChoix = document.getElementById("hiddenAdresseChoix");
+
+                                var labelVilleChoix = document.getElementById("villeChoix");
+                                var hiddenVilleChoix = document.getElementById("hiddenVilleChoix");
+
+
+                                labelVilleChoix.textContent = ville;
+                                hiddenVilleChoix.value = ville;
+
+                                labelAdresseChoix.textContent = adr;
+                                hiddenAdresseChoix.value = adr;
+
+                                hiddenLieuChoix.value = nom;
+                                labelLieuChoix.textContent = nom;
+
+
+
+                                popup
+                                    .setLatLng(L.latLng(lat, lng))
+                                    .setContent("You are at : " + nom)
+                                    .openOn(carte);
+
+                                carte.flyTo([lat, lng], 17);
+
+
+
+                            }
+
+
+                            function myFunction() {
+                                // Declare variables
+                                var input, filter, table, tr, td, i, txtValue;
+                                input = document.getElementById("myInput");
+                                filter = input.value.toUpperCase();
+                                table = document.getElementById("myTable");
+                                tr = table.getElementsByTagName("tr");
+                                var cpt = 0;
+                                // Loop through all table rows, and hide those who don't match the search query
+                                for (i = 0; i < tr.length; i++) {
+                                    td = tr[i].getElementsByTagName("td")[0];
+                                    if (td) {
+                                        txtValue = td.textContent || td.innerText;
+                                        if (txtValue.toUpperCase().indexOf(filter) > -1 && cpt < 10) {
+                                            cpt++;
+                                            tr[i].style.display = "";
+                                        } else {
+                                            tr[i].style.display = "none";
+                                        }
+                                    }
+                                }
+                            }
+
+                            function myFunction2() {
+                                // Declare variables
+                                var input, filter, table, tr, td, i, txtValue;
+                                input = document.getElementById("myInput2");
+                                filter = input.value.toUpperCase();
+                                table = document.getElementById("myTable2");
+                                tr = table.getElementsByTagName("tr");
+                                var cpt = 0;
+                                // Loop through all table rows, and hide those who don't match the search query
+                                for (i = 0; i < tr.length; i++) {
+                                    td = tr[i].getElementsByTagName("td")[0];
+                                    if (td) {
+                                        txtValue = td.textContent || td.innerText;
+                                        if (txtValue.toUpperCase().indexOf(filter) > -1 && cpt < 10) {
+                                            cpt++;
+                                            tr[i].style.display = "";
+                                        } else {
+                                            tr[i].style.display = "none";
+                                        }
+                                    }
+                                }
+                            }
+
+                            function afficherAdresse() {
+                                adressse = document.getElementById("adresse");
+                                console.log(adresse.value);
+
+                                //On va regarder les lieux dispo pour cette adresse
+                                var geocode = 'https://www.mapquestapi.com/geocoding/v1/address?key=67xKGEdrVPMYCuh1WCVgD8c5aUkNISUp&location=' + adresse.value;
+
+                                var newGeocode = ' https://api-adresse.data.gouv.fr/search/?q=' + adresse.value;
+
+                                // use jQuery to call the API and get the JSON results
+                                $.getJSON(newGeocode, function(data) {
+                                    console.log(data['features']);
+
+
+                                    var node = document.getElementById("showResultAdress");
+
+                                    while (node.firstChild) {
+                                        //On supprime tte les anciennes recherches
+                                        node.removeChild(node.firstChild);
+                                    }
+
+
+                                    for (i = 0; i < data['features'].length; i++) {
+                                        var lng = data["features"][i]["geometry"]["coordinates"][0];
+                                        var lat = data["features"][i]["geometry"]["coordinates"][1];
+                                        var ville = data["features"][i]["properties"]["city"];
+                                        var codePostal = data["features"][i]["properties"]["citycode"];
+                                        var context = data["features"][i]["properties"]["context"];
+                                        var adrComplete = data["features"][i]["properties"]["label"];
+
+                                        node.innerHTML += '<tr style="border:1px solid #000000" >';
+                                        node.innerHTML += '<td> Ville : ' + ville + '</td	><br>';
+                                        node.innerHTML += '<td> Code postal : ' + codePostal + '</td	><br>';
+                                        node.innerHTML += '<td> Adresse complète : ' + adrComplete + '</td	><br>';
+                                        node.innerHTML += '<td> Plus d\'infos : ' + context + '</td	><br>';
+                                        node.innerHTML += '<button onclick="carte.flyTo([' + lat + ',' + lng + '], 20)" >Aller</button> </tr> <br><br><br>';
+
+
+                                    }
+                                    //console.log(data);
+                                });
+
+                            }
+
+                            function placerSurMap(lng, lat, ville) {
+                                consol.log("je tp ");
+
+                                popup
+                                    .setLatLng(L.latLng(lat, lng))
+                                    .setContent("You are in : " + ville)
+                                    .openOn(carte);
+
+                                carte.flyTo([lat, lng], 17);
+                            }
+                        </script>
+                </body>
+
+                </html>

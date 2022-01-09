@@ -39,7 +39,7 @@ public class SupprimerUser extends HttpServlet {
 		//TODO Vérifier que l'user est bien admin
 		
 		if(u==null || request.getParameter("idToDelete")==null) {
-			request.getRequestDispatcher( "/dashboard_admin/dashboardAdmin.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "/dashboard_admin/landing.jsp" ).forward( request, response );
 
 			
 		}

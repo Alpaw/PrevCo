@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher( "/include/choixPages.jsp" ).forward( request, response );
 
 			}else {
-			request.getRequestDispatcher( "/include/choixPages.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/include/newsfeed.jsp" ).forward( request, response );
 			}
 
 		}else {

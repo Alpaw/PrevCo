@@ -1,58 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<%@ page import="BeanPackage.*"%>
-
-<%@ page import="sql.*"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.Random"%>
 
 
-<%
 
- session = request.getSession();
 
-if(session.getAttribute("current_user")==null){
-	request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
 
-}else{
-	UserBean user= (UserBean) session.getAttribute("current_user");
-	if(!(user.getRang().equals("administrateur"))){
-		request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
-	}
-}	
 
-%>
 
-<link rel="icon"
-	href="<%= request.getContextPath() %>/template/images/fav.png"
-	type="image/png" sizes="16x16">
 
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/main.min.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/style.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/color.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/template/css/responsive.css">
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="icon"
-	href="<%= request.getContextPath() %>/template/images/fav.png"
-	type="image/png" sizes="16x16">
-<link rel="stylesheet" type="text/css"
-	href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="icon" href="/PrevCo/template/images/fav.png" type="image/png" sizes="16x16">
 
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/admin_dashboard/style.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+    <link rel="stylesheet" href="/PrevCo/template/css/main.min.css">
+    <link rel="stylesheet" href="/PrevCo/template/css/style.css">
+    <link rel="stylesheet" href="/PrevCo/template/css/color.css">
+    <link rel="stylesheet" href="/PrevCo/template/css/responsive.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="icon" href="/PrevCo/template/images/fav.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/PrevCo/admin_dashboard/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 
@@ -164,132 +138,143 @@ if(session.getAttribute("current_user")==null){
   </symbol>
 </svg>
 <header class="page-header">
-	<nav>
-		<a href="#0" aria-label="forecastr logo" class="logo"> <svg
-				width="140" height="49">
+    <nav>
+        <a href="#0" aria-label="forecastr logo" class="logo"> <svg width="140" height="49">
         <use xlink:href="#logo"></use>
       </svg>
-		</a>
-		<button class="toggle-mob-menu" aria-expanded="false"
-			aria-label="open menu">
+        </a>
+        <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
 			<svg width="20" height="20" aria-hidden="true">
         <use xlink:href="#down"></use>
       </svg>
 		</button>
-		<ul class="admin-menu">
-			<li class="menu-heading">
-				<h3>Admin</h3>
-			</li>
-			<li><a href="#0"> <svg>
+        <ul class="admin-menu">
+            <li class="menu-heading">
+                <h3>Admin</h3>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#pages"></use>
           </svg> <span>Pages</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#users"></use>
           </svg> <span>Users</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#trends"></use>
           </svg> <span>Trends</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#collection"></use>
           </svg> <span>Collection</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#comments"></use>
           </svg> <span>Comments</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#appearance"></use>
           </svg> <span>Appearance</span>
-			</a></li>
-			<li class="menu-heading">
-				<h3>Settings</h3>
-			</li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li class="menu-heading">
+                <h3>Settings</h3>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#settings"></use>
           </svg> <span>Settings</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#options"></use>
           </svg> <span>Options</span>
-			</a></li>
-			<li><a href="#0"> <svg>
+                </a>
+            </li>
+            <li>
+                <a href="#0"> <svg>
             <use xlink:href="#charts"></use>
           </svg> <span>Charts</span>
-			</a></li>
-			<li>
-				<div class="switch">
-					<input type="checkbox" id="mode" checked> <label for="mode">
+                </a>
+            </li>
+            <li>
+                <div class="switch">
+                    <input type="checkbox" id="mode" checked> <label for="mode">
 						<span></span> <span>Dark</span>
 					</label>
-				</div>
-				<button class="collapse-btn" aria-expanded="true"
-					aria-label="collapse menu">
+                </div>
+                <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
 					<svg aria-hidden="true">
             <use xlink:href="#collapse"></use>
           </svg>
 					<span>Collapse</span>
 				</button>
-			</li>
-		</ul>
-	</nav>
+            </li>
+        </ul>
+    </nav>
 </header>
 <section class="page-content">
-	<section class="search-and-user">
-		<form>
-			<input type="search" placeholder="Search Pages...">
-			<button type="submit" aria-label="submit form">
+    <section class="search-and-user">
+        <form>
+            <input type="search" placeholder="Search Pages...">
+            <button type="submit" aria-label="submit form">
 				<svg aria-hidden="true">
           <use xlink:href="#search"></use>
         </svg>
 			</button>
-		</form>
-		<div class="admin-profile">
-			<span class="greeting">Hello admin</span>
-			<div class="notifications">
-				<span class="badge">1</span>
-				<svg>
+        </form>
+        <div class="admin-profile">
+            <span class="greeting">Hello admin</span>
+            <div class="notifications">
+                <span class="badge">1</span>
+                <svg>
           <use xlink:href="#users"></use>
         </svg>
-			</div>
-		</div>
-	</section>
+            </div>
+        </div>
+    </section>
 
 
 
-	<section class="grid"></section>
+    <section class="grid"></section>
 
 
-	<hr>
-	<div class="container bootstrap snippets bootdey">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="main-box no-header clearfix">
-					<div class="main-box-body clearfix">
-						<div class="table-responsive">
-							<table class="table user-list">
-								<thead>
-									<tr>
-										<th><span>User</span></th>
-										<th><span>Created</span></th>
-										<th class="text-center"><span>Username</span></th>
+    <hr>
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th><span>User</span></th>
+                                        <th><span>Created</span></th>
+                                        <th class="text-center"><span>Username</span></th>
 
-										<th>&nbsp;</th>
-									</tr>
-								</thead>
-
-
-
-
-
-
-								<tbody>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
 
 
 
 
+
+
+                                <tbody>
 
 
 
@@ -301,102 +286,70 @@ if(session.getAttribute("current_user")==null){
 
 
 
-									<%
-                            //On va afficher les users ici 
-                            
-                            SQLConnector sql = new SQLConnector();
-                            ArrayList<UserBean> list = sql.getAllUsers();
-                            UserBean user=(UserBean) session.getAttribute("current_user");
-                            for(UserBean u: list){                            	
-                            	Random r = new Random();
-                        		int rand =r.nextInt((3 - 1) + 1) + 1;
-                        		
-                        		if(u.getId()!=user.getId())
-                            	out.print(
-                            			"<tr>"+
-                                        
-                                        "<td>"+
-                                        
-                                        
-                                            "<img src='https://bootdey.com/img/Content/user_"+rand+".jpg' alt=''>"+
-                                            "<a class='user-link'>"+u.getNom()+" "+u.getPrenom()+"</a>"+
-                                            "<span class='user-subhead'>"+u.getRang()+" id:"+u.getId()+"</span>"+
-                                        "</td>"+
-                                        "<td>"+u.getDate()+"</td>"+
-                                        "<td class='text-center'>"+
-                                            "<span class='label label-default'>"+u.getUsername()+"</span>"+
-                                        "</td>"+
-                                        "<td>"+
-                                            "<a href='#'>"+u.getEmail()+"</a>"+
-                                        "</td>"+
-                                        "<td style='width: 20%;'>"+
-                                        
-											"<form method='post' action='"+ request.getContextPath() +"/SupprimerUser' >"+
-											"<input type='hidden' value='"+u.getId()+"' name='idToDelete' > </input> "+
-											
-                                            "<button type='submit' class='btn btn-outline-danger'>Delete User</button>"+
-                                                
-                                                    
-                                                    "</form>"+
-                                                
-                                            
-                                            
-                                        "</td>"+
-                                    "</tr>"
-                                    );
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            	
-                            }
-                            
-                            // <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">
-                            // <img src="https://bootdey.com/img/Content/user_3.jpg" alt="">
 
-                            
-                            %>
+
+
+
+                                    <tr>
+                                        <td><img src='https://bootdey.com/img/Content/user_3.jpg' alt=''><a class='user-link'>Alpa Alpa</a><span class='user-subhead'>basic_user id:17</span></td>
+                                        <td>2021-12-30</td>
+                                        <td class='text-center'><span class='label label-default'>ALP</span></td>
+                                        <td><a href='#'>alpaslan_09@hotmail.ze</a></td>
+                                        <td style='width: 20%;'>
+                                            <form method='post' action='/PrevCo/SupprimerUser'><input type='hidden' value='17' name='idToDelete'> </input> <button type='submit' class='btn btn-outline-danger'>Delete User</button></form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src='https://bootdey.com/img/Content/user_3.jpg' alt=''><a class='user-link'>koko Kiki</a><span class='user-subhead'>basic_user id:22</span></td>
+                                        <td>2022-01-05</td>
+                                        <td class='text-center'><span class='label label-default'>myUsernamedebg</span></td>
+                                        <td><a href='#'>koko@g.fr</a></td>
+                                        <td style='width: 20%;'>
+                                            <form method='post' action='/PrevCo/SupprimerUser'><input type='hidden' value='22' name='idToDelete'> </input> <button type='submit' class='btn btn-outline-danger'>Delete User</button></form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src='https://bootdey.com/img/Content/user_2.jpg' alt=''><a class='user-link'>koiiiiiiiii koikoi</a><span class='user-subhead'>basic_user id:23</span></td>
+                                        <td>2022-01-05</td>
+                                        <td class='text-center'><span class='label label-default'>Username@</span></td>
+                                        <td><a href='#'>alpo@dd.eu</a></td>
+                                        <td style='width: 20%;'>
+                                            <form method='post' action='/PrevCo/SupprimerUser'><input type='hidden' value='23' name='idToDelete'> </input> <button type='submit' class='btn btn-outline-danger'>Delete User</button></form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src='https://bootdey.com/img/Content/user_2.jpg' alt=''><a class='user-link'>last Alp</a><span class='user-subhead'>basic_user id:24</span></td>
+                                        <td>2022-01-06</td>
+                                        <td class='text-center'><span class='label label-default'>opla</span></td>
+                                        <td><a href='#'>.alpaslan@gmail.com</a></td>
+                                        <td style='width: 20%;'>
+                                            <form method='post' action='/PrevCo/SupprimerUser'><input type='hidden' value='24' name='idToDelete'> </input> <button type='submit' class='btn btn-outline-danger'>Delete User</button></form>
+                                        </td>
+                                    </tr>
 
 
 
 
 
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
-	<footer class="page-footer">
-		<span>made by </span> <a href="https://georgemartsoukos.com/"
-			target="_blank"> <img width="24" height="24"
-			src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg"
-			alt="George Martsoukos logo">
-		</a>
-	</footer>
+    <footer class="page-footer">
+        <span>made by </span>
+        <a href="https://georgemartsoukos.com/" target="_blank"> <img width="24" height="24" src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg" alt="George Martsoukos logo">
+        </a>
+    </footer>
 </section>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-<script src="<%= request.getContextPath() %>/admin_dashboard/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/PrevCo/admin_dashboard/script.js"></script>

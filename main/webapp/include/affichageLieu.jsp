@@ -59,9 +59,9 @@ body {
 		if(session.getAttribute("lieuOk")!=null){
 			if (!(boolean)(session.getAttribute("lieuOk"))){
 				session.setAttribute("lieuOk",null);
-				out.print("Le lieu existe déjà. <br>");
+				out.print("Le lieu existe dÃ©jÃ . <br>");
 			}else{
-				out.print("Le lieu a bien été ajouté. <br>");
+				out.print("Le lieu a bien Ã©tÃ© ajoutÃ©. <br>");
 				session.setAttribute("lieuOk",null);
 
 			}
@@ -99,7 +99,7 @@ body {
 
 
 			<% 
-  //On affiche toute les villes (max 15) mais elles sont toutes ici bien que caché
+  //On affiche toute les villes (max 15) mais elles sont toutes ici bien que cachÃ©
   SQLConnector sql=new SQLConnector();
   
   ArrayList<VilleBean> list= sql.getAllVille();
@@ -147,29 +147,37 @@ body {
 
 
 
-	<form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/AjouterActivite">
+	<form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/AjouterActiviteServlet">
 	
-		<label for="lieuChoix">Lieu choisi </label>
-		<input type="hidden" name="lieuChoix" required ><br>
+		<label  id="lieuChoix">Lieu choisi </label>
+		
+		<input type="hidden" name="hiddenLieuChoix" id="hiddenLieuChoix" ><br>
+	
+	
+		<label  id="adresseChoix">Adresse </label>
+		<input type="hidden" name="hiddenAdresseChoix"  id="hiddenAdresseChoix" ><br>
+
+		<label  id="villeChoix">Ville </label>
+		<input type="hidden" name="hiddenVilleChoix" id="hiddenVilleChoix" ><br>
 	
 	
 	
-	<input type="date" id="start" name="trip-start"
-       value="2018-07-22"
-       min="2022-01-01" max="2030-01-01"><br>
+		<input type="date" id="dateActivite" name="dateStart"
+      		 value="2022-01-01"
+      		 min="2022-01-01" max="2030-01-01" required><br>
        
        
 		<input type="time" id="hDebut" name="hDebut"
-       min="00:00" max="23:59" required>
+       		min="00:00" max="23:59" required>
 
-			<small>Heure de début de l'activité</small><br>
+			<small>Heure de dÃ©but de l'activitÃ©</small><br>
 	
-	<input type="time" id="hFin" name="hFin"
-       min="00:00" max="23:59" required>
+		<input type="time" id="hFin" name="hFin"
+       		min="00:00" max="23:59" required>
 
-		<small>Heure de fin de l'activité</small><br>
+			<small>Heure de fin de l'activitÃ©</small><br>
 
-	<button type="submit" >Valider l'activité</button>
+		<button type="submit" >Valider l'activitÃ©</button>
 
 </form>
 
@@ -197,7 +205,7 @@ body {
 
 
 			<% 
-  //On affiche toute les villes (max 15) mais elles sont toutes ici bien que caché
+  //On affiche toute les villes (max 15) mais elles sont toutes ici bien que cachÃ©
   
   ArrayList<VilleBean> listLieu= sql.getAllLieu();
   
@@ -289,8 +297,8 @@ body {
 
             // On charge les "tuiles"
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                // Il est toujours bien de laisser le lien vers la source des données
-                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                // Il est toujours bien de laisser le lien vers la source des donnÃ©es
+                attribution: 'donnÃ©es Â© <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                 minZoom: 1,
                 maxZoom: 20
             }).addTo(carte);
@@ -298,17 +306,17 @@ body {
         //    let xmlhttp = new XMLHttpRequest();
 
          //   xmlhttp.onreadystatechange = () => {
-                // La transaction est terminée ?
+                // La transaction est terminÃ©e ?
                // if(xmlhttp.readyState == 4){
-                    // Si la transaction est un succès
+                    // Si la transaction est un succÃ¨s
                    // if(xmlhttp.status == 200){
-                        // On traite les données reçues
+                        // On traite les donnÃ©es reÃ§ues
                       //  let donnees = JSON.parse(xmlhttp.responseText)
                         
-                        // On boucle sur les données (ES8)
+                        // On boucle sur les donnÃ©es (ES8)
                       //  Object.entries(donnees.agences).forEach(agence => {
                             // Ici j'ai une seule agence
-                            // On crée un marqueur pour l'agence
+                            // On crÃ©e un marqueur pour l'agence
                     //        let marker = L.marker([agence[1].lat, agence[1].lon]).addTo(carte)
                       //      marker.bindPopup(agence[1].nom)
                        // })
@@ -328,7 +336,6 @@ body {
            for(VilleBean v : listLieu){
         	   
         	   
-        	   System.out.println("Lat : "+v.getLatitude()+", long: "+v.getLongitude());	
         	   
                out.print(" marker = L.marker(["+v.getLatitude()+", "+v.getLongitude()+"]).addTo(carte).on('click',onClickMarker);"+
 			"marker.bindPopup(\""+v.getNom()+":"+v.getVille()+":"+v.getAdresse()+"\");");
@@ -342,43 +349,30 @@ body {
            function onClickMarker(e){
         	   
         	   
-        	   //TODO Remplir le formulaire pour ajouter une activité pss un lieu
+        	   //TODO Remplir le formulaire pour ajouter une activitÃ© pss un lieu
         	   var pop=e.target.getPopup();
-        	   
-        	   
-        	   
-        	   var villeLabel=document.getElementById("villeLabel");
-           	var latLabel=document.getElementById("latitudeLabel");
-           	var lngLabel=document.getElementById("longitudeLabel");
-           	var adresseLabel=document.getElementById("adresseLabel");
-           	
-           	
-           	var hiddenLat=document.getElementById("hiddenLat");
-           	var hiddenLng=document.getElementById("hiddenLng");
-           	var hiddenAdr=document.getElementById("hiddenAdr");
-           	var hiddenVille=document.getElementById("hiddenVille");
-
-           	var nom=document.getElementById("nomInput");
-           	var hiddenNom=document.getElementById("hiddenNom");
+        
            	
            	
            	
-        	   console.log(pop.getContent().split(":")[0]+","+pop.getContent().split(":")[0] );
-        	   
-             	villeLabel.textContent=pop.getContent().split(":")[1];
-             	hiddenVille.value=pop.getContent().split(":")[1];
+           	var labelLieuChoix=document.getElementById("lieuChoix");
+           	var hiddenLieuChoix=document.getElementById("hiddenLieuChoix");
 
-           	lngLabel.textContent=e.latlng.lng;
-           	hiddenLng.value=e.latlng.lng;
+           	var labelAdresseChoix=document.getElementById("adresseChoix");
+           	var hiddenAdresseChoix=document.getElementById("hiddenAdresseChoix");
 
-           	latLabel.textContent=e.latlng.lat;
-           	hiddenLat.value=e.latlng.lat;
+           	var labelVilleChoix=document.getElementById("villeChoix");
+           	var hiddenVilleChoix=document.getElementById("hiddenVilleChoix");
+           	
+           	
+           	labelVilleChoix.textContent=pop.getContent().split(":")[1];
+           	hiddenVilleChoix.value=pop.getContent().split(":")[1];
 
-           	adresseLabel.textContent=pop.getContent().split(":")[2];
-           	hiddenAdr.value=pop.getContent().split(":")[2];
+            labelAdresseChoix.textContent=pop.getContent().split(":")[2];
+            hiddenAdresseChoix.value=pop.getContent().split(":")[2];
 
-           	hiddenNom.value=pop.getContent().split(":")[0];
-           	nom.value=pop.getContent().split(":")[0];
+           	hiddenLieuChoix.value=pop.getContent().split(":")[0];
+           	labelLieuChoix.textContent=pop.getContent().split(":")[0];
            	
         	   
            }
@@ -399,7 +393,7 @@ body {
             	 
                 popup
                     .setLatLng(e.latlng)
-                    .setContent("Vous avez cliqué ici ! Les informations ont été automatiquement remplis dans le formulaire pour ajouter le lieu." )
+                    .setContent("Vous avez cliquÃ© ici ! Les informations ont Ã©tÃ© automatiquement remplis dans le formulaire pour ajouter le lieu." )
                     .openOn(carte);
                 
                
@@ -461,7 +455,7 @@ body {
                  .setContent("You are in : "+ville)
                  .openOn(carte);
             	
-            	carte.flyTo([lat,lng], 15);
+            	carte.flyTo([lat,lng], 18);
             	
             	 
 
@@ -470,45 +464,35 @@ body {
             function trOnClick2(lat,lng,nom,adr,ville){
 
             	
-            	 var villeLabel=document.getElementById("villeLabel");
-                	var latLabel=document.getElementById("latitudeLabel");
-                	var lngLabel=document.getElementById("longitudeLabel");
-                	var adresseLabel=document.getElementById("adresseLabel");
-                	
-                	
-                	var hiddenLat=document.getElementById("hiddenLat");
-                	var hiddenLng=document.getElementById("hiddenLng");
-                	var hiddenAdr=document.getElementById("hiddenAdr");
-                	var hiddenVille=document.getElementById("hiddenVille");
+            	
+               	
+               	var labelLieuChoix=document.getElementById("lieuChoix");
+               	var hiddenLieuChoix=document.getElementById("hiddenLieuChoix");
 
-                	var nome=document.getElementById("nomInput");
-                	var hiddenNom=document.getElementById("hiddenNom");
-                	
-                	
-                             	   
-                  	villeLabel.textContent=ville;
-                  	hiddenVille.value=ville;
+               	var labelAdresseChoix=document.getElementById("adresseChoix");
+               	var hiddenAdresseChoix=document.getElementById("hiddenAdresseChoix");
 
-                	lngLabel.textContent=lng;
-                	hiddenLng.value=lng;
+               	var labelVilleChoix=document.getElementById("villeChoix");
+               	var hiddenVilleChoix=document.getElementById("hiddenVilleChoix");
+               	
+               	
+               	labelVilleChoix.textContent=ville;
+               	hiddenVilleChoix.value=ville;
 
-                	latLabel.textContent=lat;
-                	hiddenLat.value=lat;
+                labelAdresseChoix.textContent=adr;
+                hiddenAdresseChoix.value=adr;
 
-                	adresseLabel.textContent=adr;
-                	hiddenAdr.value=adr;
-
-                	hiddenNom.value=nom;
-                	nome.value=nom;
+               	hiddenLieuChoix.value=nom;
+               	labelLieuChoix.textContent=nom;
                 	
                 	
             	
             	 popup
                  .setLatLng(L.latLng(lat, lng))
-                 .setContent("You are in : "+ville)
+                 .setContent("You are at : "+nom)
                  .openOn(carte);
             	
-            	carte.flyTo([lat,lng], 15);
+            	carte.flyTo([lat,lng], 18);
             	
             	 
 
@@ -594,7 +578,7 @@ body {
                 	   node.innerHTML += '<tr >';
                 	   node.innerHTML += '<td> Ville : '+ville+'</td	><br>';
                 	   node.innerHTML += '<td> Code postal : '+codePostal+'</td	><br>';
-                	   node.innerHTML += '<td> Adresse complète : '+adrComplete+'</td	><br>';
+                	   node.innerHTML += '<td> Adresse complÃ¨te : '+adrComplete+'</td	><br>';
                 	   node.innerHTML += '<td> Plus d\'infos : '+context+'</td	><br>';
                   	   node.innerHTML +='<button onclick="carte.flyTo(['+lat+','+lng+'], 20)" >Aller</button> </tr> <br><br><br>';
 
@@ -613,7 +597,7 @@ body {
                 .setContent("You are in : "+ville)
                 .openOn(carte);
            	
-           	carte.flyTo([lat,lng], 15);
+           	carte.flyTo([lat,lng], 17);
             }
             
             

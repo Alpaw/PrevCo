@@ -17,8 +17,9 @@
 
 
 
-                <% if(session.getAttribute("current_user")==null){
-	request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
+                <% if(session.getAttribute("current_user")==null	|| session.getAttribute("recherche")==null	){			
+                
+                request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
 
 }
 	%>
@@ -200,20 +201,14 @@
                                                 <div class="central-meta">
                                                     <div class="frnds">
                                                         <ul class="nav nav-tabs">
-                                                            <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">My Friends</a> <span> <%
-											 
-											 
-												//	System.out.println("Je vais afficher les amis de : "+u.getId());
-													SQLConnector sql=new SQLConnector();
-												 	
-													 out.print(sql.getFriends(u.getId()).size());
+                                                           
+                                                            <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">R	&eacute;sultat de la recherche</a> <span> <%
+                                                            
+               											SQLConnector sql=new SQLConnector();
 
-									
-											 %>
-												</span></li>
-                                                            <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Friend request</a> <span> <%
-												 	
-													 out.print(sql.getFriendsRequest(u.getId()).size());
+                       											 ArrayList<Friend> list1= sql.getRecherche((String)session.getAttribute("recherche"),u.getId());
+
+													 out.print(list1.size());
 													 
 													 
 													 %>
@@ -222,65 +217,7 @@
 
                                                         <!-- Tab panes -->
                                                         <div class="tab-content">
-                                                            <div class="tab-pane active fade show " id="frends">
-                                                                <ul class="nearby-contct">
-                                                                    <%
-
-//											System.out.println("Je vais afficher les amis de : "+u.getId());
-											ArrayList<Friend> list= sql.getFriends(u.getId());
-											int cpt=0;
-											for(Friend f : list){
-												
-
-												
-												
-												out.print(" <li>"+
-												
-														
-														
-														"<div class='nearly-pepls'>"+
-														"<figure>"+
-															"<a  title=''><img src=\" https://picsum.photos/"+(60+cpt)+"/"+(60+cpt)+" \" alt=''></a>"+
-														"</figure>"+
-														"<div class='pepl-info'>"+
-																"<form method='post' action='"+ request.getContextPath() +"/AffichageAmi' id='show" +f.getId()+"'>"+
-
-															"<input type='submit' href='time-line.html' title='' value='"+ f.getNom()+" "+f.getPrenom()+"' ></input>"
-																	+"<input type='hidden' name='idToShow' value='"+ f.getId()+"'/>"
-															+"</form><br>"+
-																	"<h4><a href='time-line.html' title=''>"+" @"+f.getUsername()+" ("+f.getId()+")"+"</a></h4>"+
-
-															"<span>"+f.getRole()+"</span>"+
-															
-																	
-															"<form method='post' action='"+ request.getContextPath() +"/DeleteFriendServlet' id='delete" +f.getId()+"'>"+
-																	"<input type='hidden'" +" value='"+f.getId()+"' name='idToDelete' "+"></input>"+
-
-															"<input type='submit'" +" value='Delete' class='add-butn more-action' "+"></input>"+
-												
-															
-														"</form></div>"+
-													"</div> "+
-														
-												"</li>"
-												);
-												cpt++;
-											}
-											
-											//															"<a href='"+request.getContextPath()+"/DeleteFriendServlet "+"' title='' class='add-butn more-action' data-ripple='' >unfriend</a>"
-
-											
-											
-											
-											
-											
-											
-											%>
-
-
-                                                                </ul>
-                                                                <% // <div class="lodmore"><button class="btn-view btn-load-more"></button></div>%>
-                                                            </div>
+                                                           
                                                             <div class="tab-pane fade" id="frends-req">
                                                                 <ul class="nearby-contct">
 
@@ -291,8 +228,10 @@
 											 session = request.getSession();
 											 u=(UserBean) session.getAttribute("current_user");
 											//System.out.println("Je vais afficher les requetes d'amis de : "+u.getId());
-											 sql=new SQLConnector();
-											for(Friend f : sql.getFriendsRequest(u.getId())){
+											int cpt=0;
+											 
+
+											for(Friend f : list1){
 												
 												out.print(" <li>"+
 														"<div class='nearly-pepls'>"+
@@ -308,22 +247,9 @@
 
 															"<span>"+f.getRole()+"</span>"+
 															
-															"<form method='post' action='"+ request.getContextPath() +"/CancelFriendServlet' id='cancel'>"+
-															"<input type='hidden'" +" value='"+f.getId()+"' name='idToCancel' "+"></input>"+
-																	"<input type='hidden'" +" value='"+2+"' name='redirectionPage' "+"></input>"+
-
-															"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>"+
-															
-															
-															"</form>"		+
-															
-															"<form method='post' action='"+ request.getContextPath() +"/ConfirmFriendServlet' id='confirm" +f.getId()+"'>"+
-																	"<input type='hidden'" +" value='"+f.getId()+"' name='idToConfirm' "+"></input>"+
-
-															"<input type='submit'" +" value='Confirm' class='add-butn' "+"></input>"+
-															
 																	
-														"</form></div>"+
+															
+															"</div>"+
 													"</div>"+
 												"</li>"
 												);
@@ -368,45 +294,7 @@
 
                                                         <div id="searchDir"></div>
                                                         <ul id="people-list" class="friendz-list">
-
-                                                            <%
 										
-										 list= sql.getFriends(u.getId());
-										
-                                         cpt=0;
-										for(Friend f : list){
-											
-
-											
-											
-											out.print(
-													"<li>"+
-											"<figure>"+
-											"<img src='https://picsum.photos/"+(60+cpt)+"/"+(60+cpt)+"' alt=''>"+
-											"<span class='status f-online'></span>"+
-										"</figure>"+
-										"<div class='friendz-meta'>"+
-												"<form method='post' action='"+ request.getContextPath() +"/AffichageAmi' id='show" +f.getId()+"'>"+
-
-															" <label title='' value='' >"+ f.getNom()+" "+f.getPrenom()+"</label>"	+														
-																	
-																	
-											"<br><i>@"+f.getUsername()+"</i>"+
-										"</div>"+
-									"</li>"
-											);
-											cpt++;
-										}
-										
-										
-										
-										%>
-
-
-
-
-
-
                                                         </ul>
 
 

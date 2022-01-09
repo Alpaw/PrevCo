@@ -60,7 +60,7 @@ public class AjouterLieu extends HttpServlet {
 
 
 		if(session==null || ville==null || nom==null || adresse==null ) {
-			request.getRequestDispatcher(  "include/affichageLieu.jsp" ).forward( request, response );
+			request.getRequestDispatcher(  "include/newsfeed.jsp" ).forward( request, response );
 
 		}else {
 			
@@ -70,14 +70,14 @@ public class AjouterLieu extends HttpServlet {
 				//Erreur le lieu existe déjà
 				System.out.println("Le lieu existe déjà");
 				session.setAttribute("lieuOk", false);
-				request.getRequestDispatcher(  "include/affichageLieu.jsp" ).forward( request, response );
+				request.getRequestDispatcher(  "include/newsfeed.jsp" ).forward( request, response );
 
 
 			}else {
 				//C bon le lieu est bien ajouté
 				session.setAttribute("lieuOk", true);
 
-				request.getRequestDispatcher(  "include/affichageLieu.jsp" ).forward( request, response );
+				request.getRequestDispatcher(  "include/newsfeed.jsp" ).forward( request, response );
 
 			}
 			

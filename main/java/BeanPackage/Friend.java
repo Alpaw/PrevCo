@@ -7,7 +7,9 @@ public class Friend {
 	private String username;
 	private int id;
 	private String role;
-
+	
+	private String covid;
+	private String heure;
 	public String getNom() {
 		return nom;
 	}
@@ -37,6 +39,18 @@ public class Friend {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getCovid() {
+		return covid;
+	}
+	public void setCovid(String covid) {
+		this.covid = covid;
+	}
+	public String getHeure() {
+		return heure;
+	}
+	public void setHeure(String heure) {
+		this.heure = heure;
 	}
 	
 
