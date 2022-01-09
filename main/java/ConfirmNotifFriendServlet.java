@@ -42,12 +42,6 @@ public class ConfirmNotifFriendServlet extends HttpServlet {
 		SQLConnector sql=new SQLConnector();
 		HttpSession session = request.getSession();
 		UserBean u=(UserBean) session.getAttribute("current_user");
-		if(u==null || request.getParameter("id2")==null) {
-			request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
-
-			
-		}
-		else {
 			try{
 				
 				int autoId = Integer.parseInt(request.getParameter("autoId"));
@@ -73,16 +67,17 @@ public class ConfirmNotifFriendServlet extends HttpServlet {
 		        System.out.println("date          : " + date);
 				*/
 				sql.confirmFriend(u.getId(),Integer.parseInt(request.getParameter("id2")) );
+				System.out.println("AUTOID / "+autoId);
 				sql.removeNotif(autoId);
 
-				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/include/notifications.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
-				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );
+				request.getRequestDispatcher( "/include/notifications.jsp" ).forward( request, response );
 
 			}
 			
 		}
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

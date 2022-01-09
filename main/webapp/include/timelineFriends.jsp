@@ -126,9 +126,22 @@
                                                         <h4 class="widget-title">Shortcuts</h4>
                                                         <ul class="naves">
                                                             <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath() %>/include/newsfeed.jsp" title="">News feed</a></li>
-                                                            <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">Amis</a></li>
+                                                            <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
                                                             <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                                            <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
+                                                            <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
+                                                            	
+                                                            	<%
+                                                            	 u = (UserBean) session.getAttribute("current_user");
+                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
+																		
+																		"<input type='submit' class='underling' value='Logout'>  </input>"
+																		
+																		
+																		
+																		+"</form>");
+                                                            	
+                                                            	%>
+                                                            	</a></li>
                                                         </ul>
                                                     </div>
                                                     <!-- Shortcuts -->
@@ -142,7 +155,7 @@
                                                 <div class="central-meta">
                                                     <div class="frnds">
                                                         <ul class="nav nav-tabs">
-                                                            <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">Mes amis</a> <span> <%
+                                                            <li class="nav-item"><a class="active" href="#frends" data-toggle="tab">My Friends</a> <span> <%
 											 
 											 
 												//	System.out.println("Je vais afficher les amis de : "+u.getId());
@@ -153,7 +166,7 @@
 									
 											 %>
 												</span></li>
-                                                            <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Demandes d'amis</a> <span> <%
+                                                            <li class="nav-item"><a class="" href="#frends-req" data-toggle="tab">Friend request</a> <span> <%
 												 	
 													 out.print(sql.getFriendsRequest(u.getId()).size());
 													 
@@ -198,7 +211,7 @@
 															"<form method='post' action='"+ request.getContextPath() +"/DeleteFriendServlet' id='delete" +f.getId()+"'>"+
 																	"<input type='hidden'" +" value='"+f.getId()+"' name='idToDelete' "+"></input>"+
 
-															"<input type='submit'" +" value='Supprimer' class='add-butn more-action' "+"></input>"+
+															"<input type='submit'" +" value='Delete' class='add-butn more-action' "+"></input>"+
 												
 															
 														"</form></div>"+
@@ -254,7 +267,7 @@
 															"<input type='hidden'" +" value='"+f.getId()+"' name='idToCancel' "+"></input>"+
 																	"<input type='hidden'" +" value='"+2+"' name='redirectionPage' "+"></input>"+
 
-															"<input type='submit'" +" value='Refuser la demande' class='add-butn' "+"></input>"+
+															"<input type='submit'" +" value='Delete request' class='add-butn' "+"></input>"+
 															
 															
 															"</form>"		+
@@ -262,7 +275,7 @@
 															"<form method='post' action='"+ request.getContextPath() +"/ConfirmFriendServlet' id='confirm" +f.getId()+"'>"+
 																	"<input type='hidden'" +" value='"+f.getId()+"' name='idToConfirm' "+"></input>"+
 
-															"<input type='submit'" +" value='Confirmer' class='add-butn' "+"></input>"+
+															"<input type='submit'" +" value='Confirm' class='add-butn' "+"></input>"+
 															
 																	
 														"</form></div>"+
@@ -306,7 +319,7 @@
 
                                                     <div class="widget friend-list stick-widget">
 
-                                                        <h4 class="widget-title">Amis</h4>
+                                                        <h4 class="widget-title">Friends</h4>
 
                                                         <div id="searchDir"></div>
                                                         <ul id="people-list" class="friendz-list">

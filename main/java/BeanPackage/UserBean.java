@@ -13,9 +13,7 @@ public class UserBean  {
 	private java.sql.Date date; 
 	
 	private java.sql.Date dateNaissance; 
-	
-	private String covid;
-	private String heure;
+
 	
 	public int getId() {
 		return this.id;
@@ -95,21 +93,5 @@ public class UserBean  {
 
 	public void setDateNaissance(java.sql.Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
-	}
-
-	public String getCovid() {
-		return covid;
-	}
-
-	public void setCovid(String covid) {
-		this.covid = covid;
-	}
-
-	public String getHeure() {
-		return heure;
-	}
-
-	public void setHeure(String heure) {
-		this.heure = heure;
 	}
 }

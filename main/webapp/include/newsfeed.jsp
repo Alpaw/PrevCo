@@ -94,10 +94,23 @@ if(session.getAttribute("current_user")==null){
                                                             <h4 class="widget-title">Shortcuts</h4>
                                                             <ul class="naves">
                                                                 <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath()%>/include/newsfeed.jsp" title="">News feed</a></li>
-                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">Amis</a></li>
+                                                                <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
 
                                                                 <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                                                <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
+                                                                <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
+                                                            	
+                                                            	<%
+                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
+																		
+																		"<input type='submit' class='underling' value='Logout'>  </input>"
+																		
+																		
+																		
+																		+"</form>");
+                                                            	
+                                                            	%>
+                                                            	</a></li>
                                                             </ul>
                                                         </div>
                                                         <!-- Shortcuts -->
@@ -108,7 +121,7 @@ if(session.getAttribute("current_user")==null){
 
                                                                 <%
                                                             	SQLConnector sql=new SQLConnector();
-                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	u = (UserBean) session.getAttribute("current_user");
                                                             	ArrayList<ActiviteBean> list= sql.getAllActiviteByUser(u.getId());
                                                             	
                                                             	int cptAct=0;
@@ -183,30 +196,11 @@ if(session.getAttribute("current_user")==null){
                                                         <main>
                                                         
                                                         
-  																
-  																<% if(!sql.verifCovid(u.getId())){
-  																	
-  																	
-  																	out.print("Vous etes positif, declarez vous negatif apres votre quarantaine.<br>"+
-  																			
-  																			"<form style='border-style: dashed solid;' action='"+request.getContextPath() +"/JeSuisPasCovidServlet'>"+
-  																	
-  																	"<button type='submit' >JE SUIS NEGATIF JE PREVIENS TOUT LE MONDE</button>"+
-  																	
-  																	"</form>");
-  																	
-  																	
-  																	
-  																}else{
-  																	out.print("<form style='border-style: dashed solid;' action='"+request.getContextPath() +"/JeSuisCovidServlet'>"+
-  		  																	
-  																	"<button type='submit' >JE SUIS POSITIF JE PREVIENS TOUT LE MONDE</button>"+
-  																	
-  																	"</form>");
-  																}
-  																
-  																%>
-  																
+                                                            <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/JeSuisCovidServlet">
+										
+																<button type="submit" >JE SUIS POSITIF JE PREVIENS TOUT LE MONDE</button>
+																</form>
+
 
                                                             <form style="border-style: dashed solid;" action="<%= request.getContextPath() %>/RechercherUserServlet">
 																<input type="text" name="recherche">
@@ -354,19 +348,15 @@ if(session.getAttribute("current_user")==null){
 
 
                                                             <%
-                                                            int uFtmp=-1;
                                                         ArrayList<ActiviteBean> listActFriends=sql.getFriendsActivity(u.getId());
                                                         int cpt=0;
                                                         for(ActiviteBean act : listActFriends){
                                                         	UserBean uF  = sql.getFriend(act.getUserId());
-                                                        	if(uFtmp==-1){
-                                                        		uFtmp=uF.getId();
-                                                        	}
                                                         	out.print(
                                                         	"<div class='user-post'>"+
                                                             "<div class='friend-info'>"+
                                                                 "<figure>"+
-                                                                    "<img src='https://picsum.photos/"+(cpt+40)+"/"+(cpt+39)+"' alt=''>"+
+                                                                    "<img src='https://picsum.photos/"+(cpt+60)+" alt=''>"+
                                                                 "</figure>"+
                                                                 "<div class='friend-name'>"+
                                                                     "<ins>"+
@@ -384,14 +374,7 @@ if(session.getAttribute("current_user")==null){
 	                                                                "</div>"+
 	                                                            "</div>"+
 	                                                        "</div>");
-                                                        	
-                                                        	
-                                                        	if(uFtmp!=uF.getId()){
                                                         	cpt++;
-                                                        	}else{
-                                                        		cpt++;
-                                                        		uFtmp=uF.getId();
-                                                        	}
                                                         	
                                                         	
                                                         }
@@ -484,7 +467,7 @@ if(session.getAttribute("current_user")==null){
                                                         <!-- page like widget -->
 
                                                         <div class="widget friend-list stick-widget">
-                                                            <h4 class="widget-title">Amis</h4>
+                                                            <h4 class="widget-title">Friends</h4>
                                                             <div id="searchDir"></div>
                                                             <ul id="people-list" class="friendz-list">
 
