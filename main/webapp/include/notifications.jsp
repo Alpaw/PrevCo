@@ -245,7 +245,20 @@
                                              <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
 
                                              <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                             <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">Logout</a></li>
+                                             <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
+                                                            	
+                                                            	<%
+                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
+																		
+																		"<input type='submit' class='underling' value='Logout'>  </input>"
+																		
+																		
+																		
+																		+"</form>");
+                                                            	
+                                                            	%>
+                                                            	</a></li>
 											
 										</ul>
 									</div>										
@@ -258,14 +271,12 @@
 										<div class="notification-box">
 											<ul>
 											<%
-											UserBean u=(UserBean) session.getAttribute("current_user");
+											u=(UserBean) session.getAttribute("current_user");
 											SQLConnector sql = new SQLConnector();
-											int autoId=1;
+											
 											for (NotificationBean nb : sql.getAllNotifs(u.getId())){
 												UserBean userSend = null;
 												
-												nb.setAutoId(autoId);
-												autoId++;
 											
 													
 												for (UserBean user : sql.getAllUsers()){
@@ -274,7 +285,7 @@
 														if (userSend != null){
 															if (nb.getType()==1){ // cas d'une requete d'amitie
 																
-																if (sql.getFriendship(u.getId(), userSend.getId())!=2){ // si la notification est envoyÃ© par un utilisateur qui n'est pas ami avec l'utilisateur connectÃ©
+																if (sql.getFriendship(u.getId(), userSend.getId())!=2){ // si la notification est envoyé par un utilisateur qui n'est pas ami avec l'utilisateur connecté
 																	out.print(" <h6><b>Friend Request</b></h6>"
 																			+" First Name : "+userSend.getPrenom()
 																			+"<br>Family Name : "+userSend.getNom()

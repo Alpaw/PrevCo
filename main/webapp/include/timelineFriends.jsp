@@ -128,7 +128,20 @@
                                                             <li><i class="ti-clipboard"></i> <a href="<%= request.getContextPath() %>/include/newsfeed.jsp" title="">News feed</a></li>
                                                             <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">Amis</a></li>
                                                             <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                                            <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
+                                                                <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
+                                                            	
+                                                            	<%
+                                                            	 u = (UserBean) session.getAttribute("current_user");
+                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
+																		
+																		"<input type='submit' class='underling' value='Logout'>  </input>"
+																		
+																		
+																		
+																		+"</form>");
+                                                            	
+                                                            	%>
+                                                            	</a></li>
                                                         </ul>
                                                     </div>
                                                     <!-- Shortcuts -->

@@ -97,7 +97,20 @@ if(session.getAttribute("current_user")==null){
                                                                 <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">Amis</a></li>
 
                                                                 <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                                                <li><i class="ti-power-off"></i> <a href="landing.html" title="">Logout</a></li>
+                                                                                                            <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
+                                                            	
+                                                            	<%
+                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
+																		
+																		"<input type='submit' class='underling' value='Logout'>  </input>"
+																		
+																		
+																		
+																		+"</form>");
+                                                            	
+                                                            	%>
+                                                            	</a></li>
                                                             </ul>
                                                         </div>
                                                         <!-- Shortcuts -->
@@ -108,7 +121,7 @@ if(session.getAttribute("current_user")==null){
 
                                                                 <%
                                                             	SQLConnector sql=new SQLConnector();
-                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
+                                                            	 u = (UserBean) session.getAttribute("current_user");
                                                             	ArrayList<ActiviteBean> list= sql.getAllActiviteByUser(u.getId());
                                                             	
                                                             	int cptAct=0;
