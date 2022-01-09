@@ -245,20 +245,7 @@
                                              <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/timelineFriends.jsp" title="">friends</a></li>
 
                                              <li><i class="ti-user"></i> <a href="<%= request.getContextPath() %>/include/notifications.jsp" title="">Notifications</a></li>
-                                             <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">
-                                                            	
-                                                            	<%
-                                                            	UserBean u = (UserBean) session.getAttribute("current_user");
-                                                            	out.print("<form method='post' action='"+ request.getContextPath() +"/DeconnexionServlet' >"+
-																		
-																		"<input type='submit' class='underling' value='Logout'>  </input>"
-																		
-																		
-																		
-																		+"</form>");
-                                                            	
-                                                            	%>
-                                                            	</a></li>
+                                             <li><i class="ti-power-off"></i> <a href="<%= request.getContextPath() %>/include/landing.jsp" title="">Logout</a></li>
 											
 										</ul>
 									</div>										
@@ -271,12 +258,14 @@
 										<div class="notification-box">
 											<ul>
 											<%
-											u=(UserBean) session.getAttribute("current_user");
+											UserBean u=(UserBean) session.getAttribute("current_user");
 											SQLConnector sql = new SQLConnector();
-											
+											int autoId=1;
 											for (NotificationBean nb : sql.getAllNotifs(u.getId())){
 												UserBean userSend = null;
 												
+												nb.setAutoId(autoId);
+												autoId++;
 											
 													
 												for (UserBean user : sql.getAllUsers()){

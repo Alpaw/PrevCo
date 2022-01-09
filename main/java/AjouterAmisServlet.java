@@ -42,7 +42,6 @@ public class AjouterAmisServlet extends HttpServlet {
 		else {
 			try{
 				sql.addFriend(u.getId(),Integer.parseInt(request.getParameter("idToAdd")) );
-				sql.ajouterNotif(u.getId(), Integer.parseInt(request.getParameter("idToAdd")), 1);
 				request.getRequestDispatcher( "/include/affichageAmi.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
 				request.getRequestDispatcher( "/include/timelineFriends.jsp" ).forward( request, response );

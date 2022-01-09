@@ -39,7 +39,7 @@ public class SupprimerUser extends HttpServlet {
 		//TODO Vérifier que l'user est bien admin
 		
 		if(u==null || request.getParameter("idToDelete")==null) {
-			request.getRequestDispatcher( "/dashboard_admin/landing.jsp" ).forward( request, response );
+			request.getRequestDispatcher( "/include/landing.jsp" ).forward( request, response );
 
 			
 		}
@@ -51,7 +51,9 @@ public class SupprimerUser extends HttpServlet {
 				//sql.deleteFriend(u.getId(),Integer.parseInt(request.getParameter("idToDelete")) );
 				
 			
+				if(u.getId()!=Integer.parseInt(request.getParameter("idToDelete"))) {
 					sql.deleteUser(Integer.parseInt(request.getParameter("idToDelete")));
+				}
 				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
 			}catch(java.lang.NumberFormatException e) {
 				request.getRequestDispatcher( "/admin_dashboard/adminDashboard.jsp" ).forward( request, response );
